@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+    workspace:
+        container_name: php_training_workspace
+        restart: always
+        image: kenini1805/laravel-workspace
+        volumes:
+            - ./:/var/www/laravel
+        tty: true
+    php-fpm:
+        container_name: php_training_php-fpm
+        restart: always
+        image: kenini1805/laravel-php-fpm
+        volumes:
+            - ./:/var/www/laravel
+        expose:
+            - "9000"
+        links:
+            - workspace
+    nginx:
+        container_name: php_training_nginx
+        restart: always
+        image: framgia/laravel-nginx
+        volumes:
+            - ./:/var/www/laravel
+            - .docker/logs/nginx:/var/log/nginx
+        ports:
+            - "80:80"
+        links:
+            - php-fpm
+    mysql:
+        container_name: php_training_mysql
+        restart: always
+        image: mysql:5.7
+        volumes:
+            - .docker/mysql/lib:/var/lib/mysql
+            - .docker/mysql/log:/var/log/mysql
+        expose:
+            - "3306"
+        environment:
+            MYSQL_DATABASE: php_training
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root
