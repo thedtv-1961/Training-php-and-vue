@@ -20,14 +20,14 @@ class Group extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
-    }
-
     public function announcements()
     {
         return $this->hasMany(Announcement::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
     /**

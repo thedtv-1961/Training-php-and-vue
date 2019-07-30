@@ -10,5 +10,7 @@ return [
         'search' => 'Search',
         'back' => 'Back',
         'confirm_delete' => 'Are you sure?',
+        'member' => 'Member',
+        'announcement' => 'Announcement',
     ],
 ];
