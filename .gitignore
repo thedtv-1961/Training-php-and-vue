@@ -9,9 +9,11 @@
 /public/dist
 /public/fonts
 /public/vendor
+/public/uploads
 /public/mix-manifest.json
 /storage/*.key
 /vendor
+.idea
 .env
 .env.backup
 .phpunit.result.cache
