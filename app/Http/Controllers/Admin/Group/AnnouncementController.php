@@ -11,9 +11,9 @@ use App\Repositories\Group\GroupRepository;
 
 class AnnouncementController extends Controller
 {
-    /** 
+    /**
      * @var GroupRepository
-     * 
+     *
     */
     protected $groupRepository;
 
@@ -61,12 +61,54 @@ class AnnouncementController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Group $group, AnnouncementRequest $request)
-    {   
+    {
         $data = $request->only([
             'content',
         ]);
         $announcements = $group->announcements()->create($data);
 
         return redirect()->route('groups.announcements.index', $group);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $announcement_id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Group $group, $announcement_id) {
+        $announcement = $group->announcements->find($announcement_id);
+
+        return view('admin.group.announcements.edit', compact('group', 'announcement'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $announcement_id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(AnnouncementRequest $request, Group $group, $announcement_id)
+    {
+        $validated = $request->validated();
+        $announcement = $group->announcements->find($announcement_id);
+        $announcement->update($request->all());
+
+        return redirect()->route('groups.announcements.index', $group->id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $announcement
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($group_id, Request $request, Announcement $announcement)
+    {
+        $announcement->destroy($announcement->id);
+
+        return redirect()->route('groups.announcements.index', $group_id);
     }
 }

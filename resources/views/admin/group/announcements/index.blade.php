@@ -31,10 +31,7 @@
 
                     <td class="action_announcements" col="1">
                         <div class="edit_icon">
-                            <form action="" method="POST">
-                                {{ csrf_field() }}
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditAnnouncementModal"><span class="glyphicon glyphicon-edit"></span></button>
-                            </form>
+                            <a href="{{ route('groups.announcements.edit', [$group->id, $announcement->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
                         </div>
                         <div class="delete_icon">
                             <form action="{{route('groups.announcements.destroy', [$group->id, $announcement->id])}}" method="POST">
@@ -50,7 +47,7 @@
         </table>
             {{ $announcements->links() }}
         </div>
-    </div> 
+    </div>
 @endif
 
 @endsection
