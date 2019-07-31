@@ -8,9 +8,11 @@ window._ = require('lodash');
 
 try {
   window.Popper = require('popper.js').default;
+  // eslint-disable-next-line no-multi-assign
   window.$ = window.jQuery = require('jquery');
 
   require('bootstrap');
+// eslint-disable-next-line no-empty
 } catch (e) {}
 
 /**
@@ -34,6 +36,7 @@ const token = document.head.querySelector('meta[name="csrf-token"]');
 if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
+  // eslint-disable-next-line no-console
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 

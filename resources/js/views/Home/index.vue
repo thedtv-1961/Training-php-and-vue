@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Home',
   computed: {
