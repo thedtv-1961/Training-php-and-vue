@@ -143,9 +143,25 @@
             <label for="avatar" class="avatar-picture-icon-edit"></label>
         </div>
         <div class="avatar-preview">
-            <div id="avatar-preview">
+            <div id="avatar-preview" style="background-image: url('{{$user->avatar}}')">
             </div>
         </div>
     </div>
 </div>
 <!-- /Avatar -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

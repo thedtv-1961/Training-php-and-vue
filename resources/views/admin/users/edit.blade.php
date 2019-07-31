@@ -1,7 +1,7 @@
 @extends('adminlte::page')
-@section('title', trans('user.page.create'))
+@section('title', trans('user.page.edit'))
 @section('content_header')
-    <h1>{{trans('user.page.create')}}</h1>
+    <h1>{{trans('user.page.edit')}}</h1>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('/css/user.css')}}">
@@ -15,7 +15,7 @@
                       enctype="multipart/form-data">
                     @include('admin.users._form')
                     <button type="submit" class="btn btn-success">
-                        <i class="fa fa-save"></i> {{trans('user.control.button.save')}}
+                        <i class="fa fa-save"></i> {{trans('user.control.button.update')}}
                     </button>
                 </form>
             </div>

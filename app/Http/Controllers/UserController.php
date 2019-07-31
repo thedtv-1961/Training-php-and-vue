@@ -66,4 +66,14 @@ class UserController extends Controller
             ->with('message_class', 'danger')
             ->with('message', trans_choice('user.message.object_inserted_fail', 0));
     }
+
+    /**
+     * @param $id
+     * @return Illuminate\Http\Response
+     */
+    public function edit($id){
+        $user = $this->userService->getUser($id);
+
+        return view('admin.users.edit', compact('user'));
+    }
 }

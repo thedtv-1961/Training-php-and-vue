@@ -44,6 +44,10 @@ class UserService
         }
     }
 
+    public function getUser($id){
+        return $this->userRepository->find($id);
+    }
+
     /**
      * @param $avatar
      * @return string|null

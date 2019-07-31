@@ -60,4 +60,25 @@ class User extends Authenticatable
                 return trans('user.variable.gender.other_gender');
         }
     }
+
+    public function getAvatarAttribute()
+    {
+        if ($this->attributes['avatar']) {
+            return '/' . config('users.avatar_path') . '/' . $this->attributes['avatar'];
+        }
+        return '/' . config('users.avatar_path') . '/' . config('user.avatar_default');
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
