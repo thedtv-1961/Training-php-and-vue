@@ -19,6 +19,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::post('login', 'Auth\LoginController@postLogin')->name('postLogin');
 
     Route::delete('logout', 'Auth\LoginController@logout')->name('logout');
+
+    Route::resource('groups', 'GroupController');
 });
 
 Route::get('/{vue?}', function () {

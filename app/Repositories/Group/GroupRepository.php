@@ -11,4 +11,11 @@ class GroupRepository extends BaseRepository implements GroupInterface
     {
         return Group::class;
     }
+
+    public function likeSearch($column, $key)
+    {
+        $this->model = $this->model->likeSearch($column, $key);
+
+        return $this;
+    }
 }
