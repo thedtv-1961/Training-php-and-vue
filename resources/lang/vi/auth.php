@@ -15,5 +15,6 @@ return [
 
     'failed' => 'Sai tài khoản hoặc mật khẩu',
     'throttle' => 'Đăng nhập sai quá nhiều lần. Vui lòng thử lại trong :seconds giây.',
+    'logout' => 'Đăng xuất thành công',
 
 ];
