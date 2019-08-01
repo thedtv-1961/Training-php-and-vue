@@ -87,9 +87,9 @@ return [
 
     'dashboard_url' => 'home',
 
-    'logout_url' => 'logout',
+    'logout_url' => 'admin/logout',
 
-    'logout_method' => null,
+    'logout_method' => 'delete',
 
     'login_url' => 'login',
 
