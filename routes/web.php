@@ -12,9 +12,15 @@
 */
 
 Route::get('/{vue?}', function () {
-  return view('spa');
+    return view('spa');
 })->where('vue', '[\/\w\.-]*');
 
-Route::get('/admin', function () {
-  return view('admin.index');
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    Route::get('/', 'HomeController@index')->name('admin-home');
+
+    Route::get('login', 'Auth\LoginController@getLogin')->name('getLogin');
+
+    Route::post('login', 'Auth\LoginController@postLogin')->name('postLogin');
+
+    Route::delete('logout', 'Auth\LoginController@logout')->name('logout');
 });
