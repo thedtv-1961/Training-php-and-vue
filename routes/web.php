@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('spa');
-});
+Route::get('/{vue?}', function () {
+  return view('spa');
+})->where('vue', '[\/\w\.-]*');
 
 Route::get('/admin', function () {
-    return view('admin.index');
+  return view('admin.index');
 });

@@ -15,6 +15,10 @@ export const constantRoutes = [
     name: 'Home',
     component: () => import(/* webpackChunkName:"Home" */'../views/Home/index'),
   },
+  {
+    path: '/login',
+    component: () => import(/* webpackChunkName:"Login" */'../views/Login/index'),
+  },
   { path: '*', redirect: '/404', hidden: true },
 ];
 
