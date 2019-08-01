@@ -7,13 +7,13 @@ export const constantRoutes = [
   {
     path: '/404',
     redirect: { name: 'Page404' },
-    component: () => import('../views/ErrorPage/404'),
+    component: () => import(/* webpackChunkName:"404" */'../views/ErrorPage/404'),
     hidden: true,
   },
   {
     path: '',
     name: 'Home',
-    component: () => import('../views/Home/index'),
+    component: () => import(/* webpackChunkName:"Home" */'../views/Home/index'),
   },
   { path: '*', redirect: '/404', hidden: true },
 ];

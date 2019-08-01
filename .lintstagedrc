@@ -1,0 +1,10 @@
+{
+  "*.js": [
+    "yarn lint",
+    "git add --force"
+  ],
+  "*.vue": [
+    "yarn lint",
+    "git add --force"
+  ]
+}

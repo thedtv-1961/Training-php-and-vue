@@ -1,17 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import getters from './getters';
 import camelCase from 'camelcase';
+import getters from './getters';
 
 Vue.use(Vuex);
 
 const modulesFiles = require.context('./modules', false, /\.js$/);
 
-const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+const modules = modulesFiles.keys().reduce((_modules, modulePath) => {
   const moduleName = camelCase(modulePath.replace(/^\.\/(.*)\.\w+$/, '$1'));
   const value = modulesFiles(modulePath);
-  modules[moduleName] = value.default;
-  return modules;
+  _modules[moduleName] = value.default;
+  return _modules;
 }, {});
 
 const store = new Vuex.Store({
