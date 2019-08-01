@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/{vue?}', function () {
-    return view('spa');
-})->where('vue', '[\/\w\.-]*');
-
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('/', 'HomeController@index')->name('admin-home');
 
@@ -24,3 +20,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
     Route::delete('logout', 'Auth\LoginController@logout')->name('logout');
 });
+
+Route::get('/{vue?}', function () {
+    return view('spa');
+})->where('vue', '[\/\w\.-]*');
+
