@@ -82,6 +82,16 @@ p.error_message {
     text-align: center;
 }
 
-.table-users tbody > tr > td {
-    vertical-align: middle;
+.table-users {
+    tbody > tr > td {
+        vertical-align: middle;
+
+        .avatar-preview {
+            width: 124px;
+            height: 139px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
 }

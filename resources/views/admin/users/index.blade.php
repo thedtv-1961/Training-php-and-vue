@@ -52,7 +52,7 @@
                 @foreach($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td class="image-upload">
+                        <td>
                             <img class="avatar-preview"
                                  src="{{ $user->avatar }}"
                                  alt="{{ $user->name }}">
@@ -89,7 +89,4 @@
             </nav>
         </div>
     </div>
-@stop
-@section('js')
-    <script src="{{ asset('/js/user.js') }}"></script>
 @stop
