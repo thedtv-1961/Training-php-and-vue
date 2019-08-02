@@ -146,5 +146,7 @@ return [
     */
 
     'attributes' => [],
-
+    'msg' => [
+        'name_regex' => 'Invalid name',
+    ],
 ];

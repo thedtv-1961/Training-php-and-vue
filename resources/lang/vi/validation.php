@@ -113,4 +113,7 @@ return [
     */
 
     'attributes' => [],
+    'msg' => [
+        'name_regex' => 'Tên không hợp lệ',
+    ],
 ];
