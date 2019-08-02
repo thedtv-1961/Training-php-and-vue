@@ -21,9 +21,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::delete('logout', 'Auth\LoginController@logout')->name('logout');
 
     Route::resource('groups', 'GroupController');
+
+    Route::group(['namespace' => 'Group'], function () {
+        Route::resource('groups.announcements', 'AnnouncementController');
+    });
 });
 
 Route::get('/{vue?}', function () {
     return view('spa');
 })->where('vue', '[\/\w\.-]*');
-
