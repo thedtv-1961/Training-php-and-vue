@@ -17,3 +17,13 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Api\AuthController@login');
 });
 
+Route::group(['namespace' => 'User'], function () {
+    Route::resource('users', 'ProfileController', [
+        'only' => [
+            'show',
+            'update',
+        ]
+    ]);
+    
+    Route::post('/change-avatar', 'ProfileController@changeAvatar');
+});
