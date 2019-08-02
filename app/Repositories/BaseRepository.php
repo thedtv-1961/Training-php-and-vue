@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Container\Container as App;
-use App\Repositories\BaseInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 abstract class BaseRepository implements BaseInterface

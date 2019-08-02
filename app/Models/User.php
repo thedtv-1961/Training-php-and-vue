@@ -20,7 +20,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'birthday',
+        'gender',
+        'phone',
+        'avatar',
+        'address',
     ];
 
     /**
@@ -46,5 +53,32 @@ class User extends Authenticatable
     public function groups()
     {
         return $this->belongsToMany(Group::class);
+    }
+
+    /**
+     * Gender Accessor
+     */
+    public function getGenderAttribute()
+    {
+        switch ($this->attributes['gender']) {
+            case config('users.gender.male'):
+                return trans('user.variable.gender.male');
+            case config('users.gender.female'):
+                return trans('user.variable.gender.female');
+            default:
+                return trans('user.variable.gender.other_gender');
+        }
+    }
+
+    /**
+     * Avatar Accessor
+     */
+    public function getAvatarAttribute()
+    {
+        if (!empty($this->attributes['avatar'])) {
+            return '/' . config('users.avatar_path') . '/' . $this->attributes['avatar'];
+        }
+
+        return '/' . config('users.avatar_default_path');
     }
 }

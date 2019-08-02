@@ -15,4 +15,7 @@ const config = require('./webpack.config');
 mix.sourceMaps()
   .js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
+  .sass('resources/sass/user.scss', 'public/css')
+  .copy('resources/js/user.js', 'public/js')
+  .copy('resources/images/avatar_default.png', 'public/images')
   .webpackConfig(config);
