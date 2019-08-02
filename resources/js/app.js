@@ -5,6 +5,7 @@ import App from '@/views/App.vue';
 import router from '@/router';
 import i18n from '@/lang';
 import store from '@/store';
+import '@/permission';
 
 require('./bootstrap');
 

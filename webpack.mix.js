@@ -12,6 +12,7 @@ const config = require('./webpack.config');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.sourceMaps()
+  .js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .webpackConfig(config);

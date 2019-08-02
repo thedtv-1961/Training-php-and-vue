@@ -4,30 +4,41 @@
       <p class="display-4 text-center mb-4">
         {{ $t("auth.login") }}
       </p>
-      <form>
-        <div class="form-group">
+      <form @submit.prevent="handleLogin">
+        <div
+          class="form-group"
+          :class="{ 'error': submitting && isValid }"
+        >
           <label for="email">
             {{ $t("auth.emailAddress") }}
           </label>
           <input
             id="email"
+            v-model="loginForm.email"
             type="email"
             class="form-control"
             :placeholder="$t('auth.enterEmail')"
           >
         </div>
 
-        <div class="form-group">
+        <div
+          class="form-group"
+          :class="{ 'error': submitting && isValid }"
+        >
           <label for="password">
             {{ $t("auth.password") }}
           </label>
           <input
             id="password"
+            v-model="loginForm.password"
             type="password"
             class="form-control"
             :placeholder="$t('auth.enterPassword')"
           >
         </div>
+        <p :class="{ 'error-message': submitting && isValid }">
+          {{ errors.error }}
+        </p>
 
         <div class="form-group form-check text-right">
           <input
@@ -61,6 +72,43 @@
 <script>
 export default {
   name: 'Login',
+  data() {
+    return {
+      loginForm: {
+        email: '',
+        password: '',
+      },
+      submitting: false,
+      redirect: undefined,
+      errors: {},
+    };
+  },
+  computed: {
+    isValid() {
+      return Object.keys(this.errors).length > 0;
+    },
+  },
+  watch: {
+    $route: {
+      handler(route) {
+        this.redirect = route.query && route.query.redirect;
+      },
+      immediate: true,
+    },
+  },
+  methods: {
+    async handleLogin() {
+      try {
+        this.submitting = true;
+        await this.$store.dispatch('user/login', this.loginForm);
+        this.$router.push({ path: this.redirect || '/' });
+      } catch (error) {
+        this.errors = error;
+      } finally {
+        this.submitting = false;
+      }
+    },
+  },
 };
 </script>
 
@@ -81,6 +129,22 @@ export default {
     box-shadow: 3px 3px 2px 0px rgba(50, 50, 50, 0.25);
     width: 50%;
   }
+}
+
+.error input[type="email"],
+.error input[type="password"] {
+  background-color: #fce4e4;
+  border: 1px solid #cc0033;
+  outline: none;
+}
+
+.error-message {
+  color: #cc0033;
+  display: inline-block;
+}
+
+.error label {
+  color: #cc0033;
 }
 
 @media (min-width: $screen-large) {

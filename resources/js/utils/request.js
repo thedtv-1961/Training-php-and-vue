@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from './auth';
 
 const service = axios.create({
-  baseURL: process.env.BASE_API,
+  baseURL: process.env.MIX_BASE_API,
   timeout: 10000,
 });
 
@@ -20,6 +20,12 @@ function recordNotFound(error) {
 
 function unauthorizedError(error) {
   if (error.response.data.error_code === 403) {
+    // TODO SOMETHING
+  }
+}
+
+function badRequest(error) {
+  if (error.response.data.error_code === 400) {
     // TODO SOMETHING
   }
 }
@@ -50,11 +56,13 @@ service.interceptors.response.use(
   error => {
     if (!error.response) throw Object.assign({ error_code: 700, message: 'Something went wrong!' });
     if (error.response && crashError(error)) throw error.response.data;
+    if (error.response && badRequest(error)) throw error.response.data;
     if (error.response && unauthenticated(error)) throw error.response.data;
     if (error.response && recordNotFound(error)) throw error.response.data;
     if (error.response && unauthorizedError(error)) throw error.response.data;
 
-    return Promise.reject(error);
+    throw error.response.data;
+    // return Promise.reject(error);
   },
 );
 
