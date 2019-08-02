@@ -6,5 +6,5 @@ return [
         'approved' => 1,
         'rejected' => 2,
     ],
-    'paginate' => 1,
+    'paginate' => 10,
 ];

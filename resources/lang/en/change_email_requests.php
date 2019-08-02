@@ -14,5 +14,8 @@ return [
         'approve' => 'Approve',
         'reject' => 'Reject',
         'action' => 'Action',
+        'update_fail' => "Update failed!",
+        'email_existed' => "Email existed",
+        'successfully_updated' => 'Successfully updated',
     ]
 ];

@@ -119,6 +119,11 @@ return [
             'url'         => 'admin/users',
             'icon'        => 'user',
         ],
+        [
+            'text'        => 'Change email requests',
+            'url'         => 'admin/change_email_requests',
+            'icon'        => 'envelope',
+        ],
     ],
 
     /*
