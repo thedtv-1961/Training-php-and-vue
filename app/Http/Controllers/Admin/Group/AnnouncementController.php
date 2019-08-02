@@ -36,7 +36,7 @@ class AnnouncementController extends Controller
     {
         $announcements = $group->announcements()->paginate(10);
 
-        return view('admin.announcements.index', [
+        return view('admin.group.announcements.index', [
             'group' => $group,
             'announcements' => $announcements,
         ]);
@@ -49,7 +49,7 @@ class AnnouncementController extends Controller
      */
     public function create(Group $group)
     {
-        return view('admin.announcements.create', [
+        return view('admin.group.announcements.create', [
             'group' => $group,
         ]);
     }
