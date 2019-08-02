@@ -29,7 +29,8 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-6">
+            <div class="col-sm-offset-3 col-sm-6 btn_create">
+                <a type="button" class="btn btn-default" href={{ route('groups.announcements.index', $group->id) }}>Back</a>
                 <button type="submit" class="btn btn-success">
                     {{ __('announcements.create_announcement') }}
                 </button>
