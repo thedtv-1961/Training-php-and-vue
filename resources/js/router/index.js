@@ -37,6 +37,14 @@ export const constantRoutes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: () => import(/* webpackChunkName:"SignUp" */'@/views/SignUp/index'),
+    meta: {
+      guest: true,
+    },
+  },
   { path: '*', redirect: '/404', hidden: true },
 ];
 

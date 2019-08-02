@@ -14,6 +14,9 @@ export default {
     enterEmail: 'Nhập email',
     enterPassword: 'Nhập mật khẩu',
     notHaveAccountYet: 'Not have account yet?',
+    userName: 'Tên người dùng',
+    enterName: 'Nhập tên người dùng',
+    confirmPassword: 'Xác nhận lại mật khẩu',
   },
   user: {
     email: 'Email',

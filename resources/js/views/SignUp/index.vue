@@ -1,20 +1,36 @@
 <template>
-  <div class="login-container">
-    <div class="login-form">
+  <div class="signup-container">
+    <div class="signup-form">
       <p class="display-4 text-center mb-4">
-        {{ $t("auth.login") }}
+        {{ $t("auth.signUp") }}
       </p>
-      <form @submit.prevent="handleLogin">
+      <form @submit.prevent="handleSignUp">
+        <div
+          class="form-group"
+          :class="{ 'error': isSubmited && inValid }"
+        >
+          <label for="name">
+            {{ $t("auth.userName") }}
+          </label>
+          <input
+            id="name"
+            v-model="signupForm.name"
+            type="text"
+            class="form-control"
+            :placeholder="$t('auth.enterName')"
+          >
+        </div>
+
         <div
           class="form-group"
           :class="{ 'error': isSubmited && inValid }"
         >
           <label for="email">
-            {{ $t("auth.emailAddress") }}
+            {{ $t("user.email") }}
           </label>
           <input
             id="email"
-            v-model="loginForm.email"
+            v-model="signupForm.email"
             type="email"
             class="form-control"
             :placeholder="$t('auth.enterEmail')"
@@ -30,39 +46,37 @@
           </label>
           <input
             id="password"
-            v-model="loginForm.password"
+            v-model="signupForm.password"
             type="password"
             class="form-control"
             :placeholder="$t('auth.enterPassword')"
           >
         </div>
+        <div
+          class="form-group"
+          :class="{ 'error': isSubmited && inValid }"
+        >
+          <label for="confirm-password">
+            {{ $t("auth.confirmPassword") }}
+          </label>
+          <input
+            id="confirm-password"
+            v-model="signupForm.confrimPassword"
+            type="password"
+            class="form-control"
+            :placeholder="$t('auth.enterPassword')"
+          >
+        </div>
+
         <p :class="{ 'error-message': isSubmited && inValid }">
           {{ errors.error }}
         </p>
-
-        <div class="form-group form-check text-right">
-          <input
-            id="rememberMe"
-            type="checkbox"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="rememberMe"
-          >
-            {{ $t("auth.rememberMe") }}
-          </label>
-        </div>
-
-        <div class="form-group text-right">
-          <span>{{ $t("auth.notHaveAccountYet") }} <a href="#">{{ $t("auth.signUp") }}</a></span>
-        </div>
 
         <button
           type="submit"
           class="btn btn-primary w-100"
         >
-          {{ $t("auth.login") }}
+          {{ $t("auth.signUp") }}
         </button>
       </form>
     </div>
@@ -71,12 +85,14 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'SignUp',
   data() {
     return {
-      loginForm: {
+      signupForm: {
+        name: '',
         email: '',
         password: '',
+        confrimPassword: '',
       },
       submitting: false,
       isSubmited: false,
@@ -98,11 +114,11 @@ export default {
     },
   },
   methods: {
-    async handleLogin() {
+    async handleSignUp() {
       try {
         this.submitting = true;
         this.isSubmited = true;
-        await this.$store.dispatch('user/login', this.loginForm);
+        await this.$store.dispatch('user/signUp', this.signupForm);
         this.$router.push({ path: this.redirect || '/' });
       } catch (error) {
         this.errors = error;
@@ -117,14 +133,14 @@ export default {
 <style lang='scss' scoped>
 @import '../../../sass/_variables.scss';
 
-.login-container {
+.signup-container {
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  .login-form {
+  .signup-form {
     background-color: $clounds;
     padding: 5rem 2rem;
     border-radius: 0.5rem;
@@ -134,11 +150,13 @@ export default {
 }
 
 .error input[type="email"],
-.error input[type="password"] {
+.error input[type="password"],
+.error input[type="text"] {
   background-color: #fce4e4;
   border: 1px solid #cc0033;
   outline: none;
 }
+
 
 .error-message {
   color: #cc0033;
@@ -150,16 +168,16 @@ export default {
 }
 
 @media (min-width: $screen-large) {
-  .login-container {
-    .login-form {
+  .signup-container {
+    .signup-form {
       width: 40%;
     }
   }
 }
 
 @media (min-width: $screen-extra-large) {
-  .login-container {
-    .login-form {
+  .signup-container {
+    .signup-form {
       width: 30%;
     }
   }

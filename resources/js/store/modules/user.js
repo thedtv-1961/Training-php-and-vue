@@ -1,19 +1,20 @@
-import { login } from '@/api/user';
+import { login, signUp } from '@/api/user';
 import { getToken, setToken } from '@/utils/auth';
 
 const state = {
-  token: getToken(),
-  email: '',
-  name: '',
+  accessToken: getToken(),
+  tokenType: '',
+  expiresAt: '',
+  user: {},
 };
 
 const mutations = {
   SET_TOKEN: (_state, token) => {
-    _state.token = token;
+    _state.accessToken = token.accessToken;
+    _state.expiresAt = token.expiresAt;
   },
   SET_INFO: (_state, info) => {
-    _state.email = info.email;
-    _state.name = info.name;
+    _state.user = info;
   },
 };
 
@@ -21,9 +22,29 @@ const actions = {
   async login({ commit }, payload) {
     const { email, password } = payload;
     try {
-      const { token } = await login({ email: email.trim(), password });
-      commit('SET_TOKEN', token);
-      setToken(token);
+      const {
+        access_token: accessToken,
+        expires_at: expiresAt,
+        user,
+      } = await login({ email: email.trim(), password });
+      commit('SET_TOKEN', { accessToken, expiresAt });
+      commit('SET_INFO', user);
+      setToken(accessToken);
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+  async signUp({ commit }, payload) {
+    try {
+      const {
+        access_token: accessToken,
+        expires_at: expiresAt,
+        user,
+      } = await signUp({ ...payload });
+      commit('SET_TOKEN', { accessToken, expiresAt });
+      commit('SET_INFO', user);
+      setToken(accessToken);
       return Promise.resolve();
     } catch (error) {
       return Promise.reject(error);

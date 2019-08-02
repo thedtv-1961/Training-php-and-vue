@@ -14,6 +14,9 @@ export default {
     enterEmail: 'Enter email',
     enterPassword: 'Enter password',
     notHaveAccountYet: 'Not have account yet?',
+    userName: 'User Name',
+    enterName: 'Enter Name',
+    confirmPassword: 'Confirm Password',
   },
   user: {
     email: 'Email',
