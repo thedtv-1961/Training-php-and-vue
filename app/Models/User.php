@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Group;
+use Storage;
 use Laravel\Passport\HasApiTokens;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -76,7 +74,7 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         if (!empty($this->attributes['avatar'])) {
-            return $this->attributes['avatar'];
+            return Storage::url($this->attributes['avatar']);
         }
 
         return '/' . config('users.avatar_default_path');

@@ -11,14 +11,16 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="box box-primary">
             <div class="box-body">
-                <form action="{{ route('users.update', $user->id) }}"
-                      method="post"
-                      enctype="multipart/form-data">
+                <form
+                    action="{{ route('users.update', $user->id) }}"
+                    method="post"
+                    enctype="multipart/form-data"
+                >
                     @method('patch')
                     @include('admin.users._form')
                     @if($user->getAttributes()['avatar'])
                         <input type="hidden" name="old_avatar"
-                               value="{{ $user->avatar }}">
+                               value="{{ $user->getAttributes()['avatar'] }}">
                     @endif
                     <input type="hidden" name="id" value="{{ $user->id }}">
                     <button type="submit" class="btn btn-success">

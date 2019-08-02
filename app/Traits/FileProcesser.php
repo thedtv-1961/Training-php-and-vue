@@ -10,8 +10,8 @@ trait FileProcesser
     /**
      * Upload image file
      *
-     * @param $file
-     * @param $pathUpload
+     * @param File $file
+     * @param string $pathUpload
      * @return string
      */
     public function uploadImage($file, $pathUpload)
@@ -23,23 +23,11 @@ trait FileProcesser
     }
 
     /**
-     * Delete image file
-     *
-     * @param $filePath
-     */
-    public function deleteImage($filePath)
-    {
-        if (file_exists($filePath)) {
-            unlink($filePath);
-        }
-    }
-
-    /**
      * Upload image and save to storage
      * @param  $request
-     * @param  string  $name
-     * @param  string  $pathUpload
-     * 
+     * @param string $name
+     * @param string $pathUpload
+     *
      * @return string $filePath
      */
     public function uploadUserAvatar($request, $name, $pathUpload)

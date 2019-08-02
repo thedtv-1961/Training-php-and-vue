@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
+use App\Traits\FileProcesser;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Traits\FileProcesser;
 use App\Repositories\User\UserInterface;
 
 class UserService
@@ -44,7 +45,7 @@ class UserService
             $user['password'] = bcrypt($request->password);
 
             if (isset($request['avatar'])) {
-                $user['avatar'] = $this->uploadImage($request['avatar'], config('users.avatar_path'));
+                $user['avatar'] = $this->userRepository->uploadAvatar($request, 'avatar', null, config('settings.path_upload_avatar'));
             }
 
             return $this->userRepository->create($user);
@@ -87,14 +88,49 @@ class UserService
             }
 
             if (isset($request['avatar'])) {
-                $user['avatar'] = $this->uploadImage($request['avatar'], config('users.avatar_path'));
+                $oldAvatarName = null;
 
                 if (isset($request['old_avatar'])) {
-                    $this->deleteImage(public_path($request['old_avatar']));
+                    $oldAvatarName = $request['old_avatar'];
                 }
+
+                $user['avatar'] = $this->userRepository->uploadAvatar($request, 'avatar', $oldAvatarName, config('settings.path_upload_avatar'));
             }
 
             return $this->userRepository->update($id, $user);
+        } catch (\Exception $exception) {
+            report($exception);
+
+            return false;
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getUsers(Request $request)
+    {
+        $keyword = $request->get('keyword') != '' ? $request->get('keyword') : '';
+        $sort = $request->get('sort') != '' ? $request->get('sort') : 'desc';
+        $sortByField = $request->get('field') != '' ? $request->get('field') : 'id';
+
+        return $this->userRepository->likeSearch($keyword)
+            ->orderBy($sortByField, $sort)
+            ->paginate(config('users.row_per_page'))
+            ->withPath('?keyword=' . $keyword);
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function removeUser(Request $request)
+    {
+        try {
+            $this->userRepository->find($request->user)->delete();
+
+            return true;
         } catch (\Exception $exception) {
             report($exception);
 

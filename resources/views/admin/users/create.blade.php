@@ -11,8 +11,11 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="box box-primary">
             <div class="box-body">
-                <form action="{{ route('users.store') }}" method="post"
-                      enctype="multipart/form-data">
+                <form
+                    action="{{ route('users.store') }}"
+                    method="post"
+                    enctype="multipart/form-data"
+                >
                     @include('admin.users._form')
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-save"></i> {{ trans('user.control.button.save') }}

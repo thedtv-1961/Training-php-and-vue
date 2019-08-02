@@ -2,11 +2,11 @@
 return [
     'attribute' => [
         'id' => [
-            'label' => 'ID'
+            'label' => 'ID',
         ],
         'email' => [
             'placeholder' => 'Input email address',
-            'label' => 'Email'
+            'label' => 'Email',
         ],
         'name' => [
             'placeholder' => 'Input user name',
@@ -14,28 +14,28 @@ return [
         ],
         'password' => [
             'placeholder' => 'Input password',
-            'label' => 'Password'
+            'label' => 'Password',
         ],
         'password_confirmation' => [
             'placeholder' => 'Input password confirmation',
-            'label' => 'Password Confirmation'
+            'label' => 'Password Confirmation',
         ],
         'birthday' => [
-            'label' => 'Birthday'
+            'label' => 'Birthday',
         ],
         'phone' => [
             'placeholder' => 'Input phone number',
-            'label' => 'Phone Number'
+            'label' => 'Phone Number',
         ],
         'gender' => [
-            'label' => 'Gender'
+            'label' => 'Gender',
         ],
         'avatar' => [
-            'label' => 'Avatar'
+            'label' => 'Avatar',
         ],
         'address' => [
             'placeholder' => 'Input address',
-            'label' => 'Address'
+            'label' => 'Address',
         ],
     ],
     'control' => [
@@ -55,6 +55,7 @@ return [
             'female' => 'Female',
             'other_gender' => 'Other Gender',
         ],
+        'search' => 'Type any keyword to search...',
     ],
     'message' => [
         'object_inserted_success' => '{0}Create user successfully',
@@ -63,11 +64,11 @@ return [
         'object_inserted_fail' => '{0}Create user failed',
         'object_updated_fail' => '{0}Update user failed',
         'object_deleted_fail' => '{0}Delete user failed',
-        'confirm_delete' => 'Are you sure?'
+        'confirm_delete' => 'Are you sure?',
     ],
     'page' => [
         'title' => 'User Management',
         'create' => 'Create new User',
-        'edit' => 'Edit User'
+        'edit' => 'Edit User',
     ],
 ];
