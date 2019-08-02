@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminLoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -33,7 +33,7 @@ class LoginController extends Controller
         return view('admin.auth.login');
     }
 
-    public function postLogin(AdminLoginRequest $request) {
+    public function postLogin(LoginRequest $request) {
         $data = $request->only([
             'email',
             'password',
