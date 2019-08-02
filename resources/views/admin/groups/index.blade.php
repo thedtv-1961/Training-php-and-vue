@@ -3,6 +3,9 @@
 @section('content_header')
     <h1>{{trans('group.page.index')}}</h1>
 @stop
+@section('css')
+    <link rel="stylesheet" href="{{ asset('/css/group.css') }}">
+@stop
 @section('content')
 <div class="row">
     <div>
@@ -25,6 +28,7 @@
                             {{ trans('group.attribute.name.label') }}
                         </a>
                     </th>
+                    <th>{{ trans('group.attribute.image.label') }}</th>
                     <th>{{ trans('group.attribute.description.label') }}</th>
                     <th colspan = 2>{{ trans('common.button.actions') }}</th>
                 </tr>
@@ -34,6 +38,7 @@
                     <tr>
                         <td>{{ $group->id }}</td>
                         <td>{{ $group->name }}</td>
+                        <td><img class="group-image" src="{{ $group->getImage() }}"></td>
                         <td>{{ $group->description }}</td>
                         <td>
                             <a href="{{ route('groups.edit',$group->id) }}" class="btn btn-primary">
@@ -41,7 +46,9 @@
                             </a>
                         </td>
                         <td>
-                            <form action="{{ route('groups.destroy', $group->id) }}" method="post">
+                            <form method="post"
+                                  action="{{ route('groups.destroy', $group->id) }}"
+                                  onsubmit="return confirm('{{ trans('common.button.confirm_delete') }}');">
                                 {!! csrf_field() !!}
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">

@@ -15,6 +15,7 @@ class Group extends Model
     protected $fillable = [
         'name',
         'description',
+        'image',
     ];
 
     protected $dates = ['deleted_at'];
@@ -27,5 +28,17 @@ class Group extends Model
     public function announcements()
     {
         return $this->hasMany(Announcement::class);
+    }
+
+    /**
+     * Avatar Accessor
+     */
+    public function getImage()
+    {
+        if (!empty($this->attributes['image'])) {
+            return '/' . config('groups.image_path') . '/' . $this->attributes['image'];
+        }
+
+        return '/' . config('groups.image_default_path');
     }
 }

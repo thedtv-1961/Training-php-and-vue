@@ -8,5 +8,7 @@ return [
         'create' => 'Add new',
         'actions' => 'Actions',
         'search' => 'Search',
+        'back' => 'Back',
+        'confirm_delete' => 'Are you sure?',
     ],
 ];
