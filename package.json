@@ -12,9 +12,9 @@
         "precommit": "lint-staged"
     },
     "husky": {
-      "hooks": {
-        "pre-commit": "yarn precommit"
-      }
+        "hooks": {
+            "pre-commit": "yarn precommit"
+        }
     },
     "devDependencies": {
         "babel-eslint": "^10.0.2",

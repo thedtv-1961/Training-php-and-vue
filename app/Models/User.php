@@ -22,12 +22,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'birthday',
-        'gender',
         'phone',
+        'gender',
         'avatar',
         'address',
+        'birthday',
+        'password',
     ];
 
     /**
@@ -76,7 +76,7 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         if (!empty($this->attributes['avatar'])) {
-            return '/' . config('users.avatar_path') . '/' . $this->attributes['avatar'];
+            return $this->attributes['avatar'];
         }
 
         return '/' . config('users.avatar_default_path');
