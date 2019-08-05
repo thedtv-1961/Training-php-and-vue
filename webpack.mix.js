@@ -19,4 +19,5 @@ mix.sourceMaps()
   .sass('resources/sass/announcements.scss', 'public/css')
   .copy('resources/js/user.js', 'public/js')
   .copy('resources/images/avatar_default.png', 'public/images')
+  .sass('resources/sass/edit_announcement.scss', 'public/css')
   .webpackConfig(config);

@@ -1,7 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Models\User;
+use App\Models\Announcement;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -16,12 +16,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Announcement::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => bcrypt('123123'),
-        'remember_token' => Str::random(10),
+        'group_id' => $faker->unique()->numberBetween(1,10),
+        'content' => $faker->sentence($nbWords = 6, $variableNbWords = true),
     ];
 });
