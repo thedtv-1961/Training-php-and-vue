@@ -144,11 +144,11 @@
                    id="avatar"
                    name="avatar"
                    accept="image/x-png,image/jpeg"
-                   class="avatar-picture">
+                   class="image-picture avatar-picture">
             <label for="avatar" class="avatar-picture-icon-edit"></label>
         </div>
-        <div class="avatar-preview">
-            <div id="avatar-preview"
+        <div class="image-preview">
+            <div id="image-preview"
                  style="background-image: url('{{ $user->avatar }}')">
             </div>
         </div>

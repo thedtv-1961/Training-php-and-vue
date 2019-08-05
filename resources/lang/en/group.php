@@ -13,6 +13,9 @@ return [
             'placeholder' => 'Input group name',
             'label' => 'Name',
         ],
+        'image' => [
+            'label' => 'Image',
+        ]
     ],
     'control' => [
         'search' => [
@@ -21,5 +24,7 @@ return [
     ],
     'page' => [
         'index' => 'List Groups',
+        'create' => 'Creare Group',
+        'edit' => 'Edit Group',
     ],
 ];

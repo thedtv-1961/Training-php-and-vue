@@ -23,5 +23,5 @@
     </div>
 @stop
 @section('js')
-    <script src="{{ asset('/js/user.js') }}"></script>
+    <script src="{{ asset('/js/upload_image.js') }}"></script>
 @stop

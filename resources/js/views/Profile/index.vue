@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     viewGroup(id) {
-      console.log(id);
+      return id;
       // TODO navigate to user's group page
     },
   },
