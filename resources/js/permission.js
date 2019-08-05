@@ -14,7 +14,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.matched.some(record => record.meta.guest)) {
     if (hasToken) {
       if (whiteList.includes(to.name)) {
-        next({ path: '/' });
+        next({ path: '/app' });
       } else {
         next();
       }

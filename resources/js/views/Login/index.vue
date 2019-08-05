@@ -103,8 +103,12 @@ export default {
         this.submitting = true;
         this.isSubmited = true;
         await this.$store.dispatch('user/login', this.loginForm);
-        this.$router.push({ path: this.redirect || '/' });
+        this.$toasted.success('Welcome to App !!!');
+        this.$router.push({ path: this.redirect || '/app' });
       } catch (error) {
+        if (error.error_code === 700) {
+          this.$toasted.error(`${error.message}`);
+        }
         this.errors = error;
       } finally {
         this.submitting = false;
