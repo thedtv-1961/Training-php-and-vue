@@ -7,6 +7,7 @@ use App\Services\UserService;
 use Illuminate\Http\Response;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -57,5 +58,38 @@ class UserController extends Controller
             ->action('Admin\UserController@create')
             ->with('message_class', 'danger')
             ->with('message', trans_choice('user.message.object_inserted_fail', 0));
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\View
+     */
+    public function edit($id)
+    {
+        $user = $this->userService->getUserById($id);
+
+        return view('admin.users.edit', compact('user'));
+    }
+
+    /**
+     * @param int $id
+     * @param UserUpdateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update($id, UserUpdateRequest $request)
+    {
+        $result = $this->userService->updateUser($id, $request);
+
+        if ($result) {
+            return redirect()
+                ->action('Admin\UserController@edit', $id)
+                ->with('message_class', 'success')
+                ->with('message', trans_choice('user.message.object_updated_success', 0));
+        }
+
+        return redirect()
+            ->action('Admin\UserController@edit', $id)
+            ->with('message_class', 'danger')
+            ->with('message', trans_choice('user.message.object_updated_fail', 0));
     }
 }
