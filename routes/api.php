@@ -17,7 +17,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Api\AuthController@login');
 });
 
-Route::group(['namespace' => 'User'], function () {
+Route::group(['namespace' => 'User', 'middleware' => 'auth:api'], function () {
     Route::resource('users', 'ProfileController', [
         'only' => [
             'show',
@@ -26,4 +26,11 @@ Route::group(['namespace' => 'User'], function () {
     ]);
     
     Route::post('/change-avatar', 'ProfileController@changeAvatar');
+
+    Route::apiResource('announcements', 'AnnouncementController', [
+        'only' => [
+            'index',
+            'show',
+        ]
+    ]);
 });
