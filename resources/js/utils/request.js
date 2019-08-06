@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { getToken } from './auth';
+import typeError from '@/constant';
+
+const camelcaseKeys = require('camelcase-keys');
 
 const service = axios.create({
   baseURL: process.env.MIX_BASE_API,
@@ -7,31 +10,31 @@ const service = axios.create({
 });
 
 function unauthenticated(error) {
-  if (error.response.data.error_code === 403) {
+  if (error.response.data.error_code === typeError.UNAUTHENTICATED) {
     // TODO SOMETHING
   }
 }
 
 function recordNotFound(error) {
-  if (error.response.data.error_code === 404) {
+  if (error.response.data.error_code === typeError.RECORD_NOT_FOUND) {
     // TODO SOMETHING
   }
 }
 
 function unauthorizedError(error) {
-  if (error.response.data.error_code === 403) {
+  if (error.response.data.error_code === typeError.UNAUTHENTICATED) {
     // TODO SOMETHING
   }
 }
 
 function badRequest(error) {
-  if (error.response.data.error_code === 400) {
+  if (error.response.data.error_code === typeError.BAD_REQUEST) {
     // TODO SOMETHING
   }
 }
 
 function crashError(error) {
-  if (error.response.status === 500) {
+  if (error.response.status === typeError.CRASH_ERROR) {
     // TODO SOMETHING
   }
 }
@@ -52,9 +55,14 @@ service.interceptors.request.use(
 );
 
 service.interceptors.response.use(
-  response => response.data,
+  response => {
+    if (response.data) {
+      return camelcaseKeys(response.data);
+    }
+    return response;
+  },
   error => {
-    if (!error.response) throw Object.assign({ error_code: 700, message: 'Something went wrong!' });
+    if (!error.response) throw Object.assign({ error_code: typeError.REQUEST_ERROR, message: 'Something went wrong!' });
     if (error.response && crashError(error)) throw error.response.data;
     if (error.response && badRequest(error)) throw error.response.data;
     if (error.response && unauthenticated(error)) throw error.response.data;

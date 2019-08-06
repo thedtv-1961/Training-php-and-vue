@@ -2,18 +2,23 @@
   <div>
     <the-header />
     <main class="container">
-      <slot />
+      <app-main />
     </main>
   </div>
 </template>
 
 <script>
-import TheHeader from '@/components/TheHeader.vue';
+import { TheHeader, AppMain } from './components';
 
 export default {
-  name: 'LayoutDefault',
+  name: 'LayoutUser',
   components: {
     TheHeader,
+    AppMain,
   },
 };
 </script>
+
+<style>
+
+</style>

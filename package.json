@@ -44,6 +44,7 @@
         "axios": "^0.18",
         "bootstrap": "^4.1.0",
         "camelcase": "^5.3.1",
+        "camelcase-keys": "^6.0.1",
         "jquery": "^3.2",
         "js-cookie": "^2.2.0",
         "lodash": "^4.17.5",
@@ -52,6 +53,7 @@
         "vue": "^2.5.17",
         "vue-i18n": "^8.12.0",
         "vue-router": "^3.0.7",
+        "vue-toasted": "^1.1.27",
         "vuex": "^3.1.1"
     }
 }

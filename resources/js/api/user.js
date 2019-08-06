@@ -18,3 +18,17 @@ export function signUp(data) {
     data,
   });
 }
+
+export function signOut() {
+  return request({
+    url: 'api/auth/logout',
+    method: 'delete',
+  });
+}
+
+export function getInfo() {
+  return request({
+    url: 'api/auth/getinfo',
+    method: 'get',
+  });
+}

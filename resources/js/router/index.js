@@ -30,20 +30,33 @@ export const constantRoutes = [
     },
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: () => import(/* webpackChunkName:"Profile" */'@/views/Profile/index'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: '/signup',
     name: 'SignUp',
     component: () => import(/* webpackChunkName:"SignUp" */'@/views/SignUp/index'),
     meta: {
       guest: true,
     },
+  },
+  {
+    path: '/app',
+    name: 'UserApp',
+    hidden: false,
+    alwaysShow: true,
+    redirect: '/app/profile',
+    component: () => import(/* webpackChunkName:"LayoutUser" */'@/components/layouts/LayoutUser'),
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import(/* webpackChunkName:"Profile" */'@/views/Profile/index'),
+        meta: {
+          requiresAuth: true,
+        },
+      },
+    ],
   },
   { path: '*', redirect: '/404', hidden: true },
 ];

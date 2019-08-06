@@ -39,7 +39,10 @@
           >{{ $t("route.groups") }}</a>
         </li>
         <li class="nav-item">
-          <button class="btn btn-secondary">
+          <button
+            class="btn btn-secondary"
+            @click="logout"
+          >
             {{ $t("auth.signOut") }}
           </button>
         </li>
@@ -49,8 +52,22 @@
 </template>
 
 <script>
+import typeError from '@/constant';
+
 export default {
   name: 'TheHeader',
+  methods: {
+    async logout() {
+      try {
+        await this.$store.dispatch('user/logout');
+        this.$router.push('/');
+      } catch (error) {
+        if (error.error_code === typeError.REQUEST_ERROR) {
+          this.$toasted.error(`${error.error_code}`);
+        }
+      }
+    },
+  },
 };
 </script>
 
