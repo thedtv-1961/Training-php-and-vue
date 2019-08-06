@@ -81,4 +81,12 @@ class User extends Authenticatable
 
         return '/' . config('users.avatar_default_path');
     }
+
+    /**
+     * Set password mutator
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

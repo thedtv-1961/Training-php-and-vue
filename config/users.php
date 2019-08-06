@@ -15,6 +15,7 @@ return [
     ],
     'name' => [
         'max' => 255,
+        'regex' => "/^[A-Za-z\x{00C0}-\x{00FF}][A-Za-z\x{00C0}-\x{00FF}\'\-]+([\ A-Za-z\x{00C0}-\x{00FF}][A-Za-z\x{00C0}-\x{00FF}\'\-]+)*/u",
     ],
     'password' => [
         'min' => 6,
