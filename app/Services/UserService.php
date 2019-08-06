@@ -35,6 +35,7 @@ class UserService
         try {
             $user = $request->only([
                 'email',
+                'password',
                 'name',
                 'gender',
                 'birthday',
@@ -42,7 +43,6 @@ class UserService
                 'address',
                 'avatar',
             ]);
-            $user['password'] = bcrypt($request->password);
 
             if (isset($request['avatar'])) {
                 $user['avatar'] = $this->userRepository->uploadAvatar($request, 'avatar', null, config('settings.path_upload_avatar'));
