@@ -9,6 +9,8 @@ use App\Services\UserService;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Test;
 
 class UserController extends Controller
 {
@@ -100,6 +102,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        Mail::send(new Test());
         $users = $this->userService->getUsers($request);
 
         return view('admin.users.index', compact('users'));

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\Test;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Traits\FileProcesser;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Group\GroupRepository;
 use App\Http\Requests\Group\CreateGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
+use Illuminate\Support\Facades\Mail;
 
 class GroupController extends Controller
 {
@@ -33,6 +35,7 @@ class GroupController extends Controller
      */
     public function index(Request $request)
     {
+
         $search = $request->get('search');
         $field = $request->get('field') != '' ? $request->get('field') : 'name';
         $sort = $request->get('sort') != '' ? $request->get('sort') : 'asc';

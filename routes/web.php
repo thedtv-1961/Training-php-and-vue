@@ -37,3 +37,5 @@ Route::get('/{vue?}', function () {
     return view('spa');
 })->where('vue', '[\/\w\.-]*');
 
+
+Route::get('mail', 'TestMailController@mail');
