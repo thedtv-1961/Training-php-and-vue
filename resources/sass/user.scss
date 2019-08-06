@@ -1,7 +1,7 @@
 /* picture edit form */
 .image-upload {
     width: 124px;
-    height: 124px;
+    height: 139px;
 
     .image-edit {
         position: relative;
@@ -78,6 +78,10 @@ p.error_message {
     color: #a94442;
 }
 
-.content-header{
+.content-header {
     text-align: center;
+}
+
+.table-users tbody > tr > td {
+    vertical-align: middle;
 }

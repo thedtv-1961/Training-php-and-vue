@@ -14,4 +14,10 @@ interface UserInterface
      * @return mixed
      */
     public function uploadAvatar($request, $name, $oldAvatarName, $pathUpload);
+
+    /**
+     * @param  $keyword
+     * @return BuilderObject
+     */
+    public function likeSearch($keyword);
 }

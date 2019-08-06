@@ -26,4 +26,5 @@ return [
     'avatar' =>[
         'max' => 2048,
     ],
+    'row_per_page' => 10,
 ];

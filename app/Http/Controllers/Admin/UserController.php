@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use App\Services\UserService;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Services\UserService;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
@@ -91,5 +92,37 @@ class UserController extends Controller
             ->action('Admin\UserController@edit', $id)
             ->with('message_class', 'danger')
             ->with('message', trans_choice('user.message.object_updated_fail', 0));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        $users = $this->userService->getUsers($request);
+
+        return view('admin.users.index', compact('users'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Request $request)
+    {
+        $result = $this->userService->removeUser($request);
+
+        if ($result) {
+            return redirect()
+                ->action('Admin\UserController@index')
+                ->with('message_class', 'success')
+                ->with('message', trans_choice('user.message.object_deleted_success', 0));
+        }
+
+        return redirect()
+            ->action('Admin\UserController@index')
+            ->with('message_class', 'danger')
+            ->with('message', trans_choice('user.message.object_deleted_fail', 0));
     }
 }
