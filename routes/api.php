@@ -24,6 +24,12 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
+Route::group(['prefix' => 'forgot-password'], function () {
+    Route::post('/', 'Api\ResetPasswordController@sendMail');
+    Route::get('find/{token}', 'Api\ResetPasswordController@checkToken')->name('find-token');
+    Route::post('reset', 'Api\ResetPasswordController@reset');
+});
+
 Route::group(['namespace' => 'User', 'middleware' => 'auth:api'], function () {
     Route::resource('users', 'ProfileController', [
         'only' => [

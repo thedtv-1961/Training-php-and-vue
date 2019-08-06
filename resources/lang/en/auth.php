@@ -18,5 +18,8 @@ return [
     'logout' => 'Successfully logged out',
     'register_success' => 'Register success',
     'register_fail' => 'Register failed! Please try again.',
-
+    'email_not_found' => 'Can not find a user with that e-amil address',
+    'send_mail_password' => 'We have e-mailed your password reset link!',
+    'token_invalid' => 'This password reset token is invalid.',
+    'token_expired' => 'This password reset token is expired.',
 ];

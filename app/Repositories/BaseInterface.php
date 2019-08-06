@@ -53,6 +53,8 @@ interface BaseInterface
 
     public function whereHas($relationships, $function);
 
+    public function whereFirst(string $conditions, string $value);
+
     public function orWhere($column, $operator = null, $value = null);
 
     public function orWhereIn($column, $values);
