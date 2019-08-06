@@ -27,4 +27,9 @@ return [
         'max' => 2048,
     ],
     'row_per_page' => 10,
+    'roles' => [
+        'admin' => 'admin',
+        'group_manager' => 'group-manager',
+        'normal_user' => 'normal-user',
+    ],
 ];
