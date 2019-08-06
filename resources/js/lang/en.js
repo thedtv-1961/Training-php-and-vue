@@ -26,4 +26,8 @@ export default {
     address: 'Address',
     yourGroups: 'Your Groups',
   },
+  notification: {
+    empty: 'Nothing to show!',
+    markAsRead: 'Mark as read',
+  },
 };

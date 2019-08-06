@@ -27,10 +27,7 @@
           >{{ $t("route.profile") }}</a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-          >{{ $t("route.notifications") }}</a>
+          <the-notification />
         </li>
         <li class="nav-item">
           <a
@@ -52,14 +49,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import typeError from '@/constant';
+import TheNotification from './TheNotification';
 
 export default {
   name: 'TheHeader',
+  components: {
+    TheNotification,
+  },
+  computed: {
+    ...mapState({
+      auth: 'user',
+    }),
+  },
   methods: {
     async logout() {
       try {
         await this.$store.dispatch('user/logout');
+        window.Echo.leave(`App.User.${this.auth.user.id}`);
         this.$router.push('/');
       } catch (error) {
         if (error.error_code === typeError.REQUEST_ERROR) {
