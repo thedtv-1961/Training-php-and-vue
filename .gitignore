@@ -11,6 +11,7 @@
 /public/vendor
 /public/uploads
 /public/mix-manifest.json
+/public/swagger
 /storage/*.key
 /vendor
 .idea

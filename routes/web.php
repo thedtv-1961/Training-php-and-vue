@@ -29,6 +29,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     });
 });
 
+Route::get('/api-docs', function() {
+   return view('swagger/index');
+});
+
 Route::get('/{vue?}', function () {
     return view('spa');
 })->where('vue', '[\/\w\.-]*');
+

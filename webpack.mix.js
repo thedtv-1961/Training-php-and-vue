@@ -14,6 +14,7 @@ const config = require('./webpack.config');
 
 mix.sourceMaps()
   .js('resources/js/app.js', 'public/js')
+  .js('resources/js/swagger.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .sass('resources/sass/user.scss', 'public/css')
   .sass('resources/sass/announcements.scss', 'public/css')
@@ -21,4 +22,14 @@ mix.sourceMaps()
   .sass('resources/sass/group.scss', 'public/css')
   .copy('resources/js/utils/upload_image.js', 'public/js')
   .copy('resources/images/*', 'public/images')
+  .copyDirectory([
+    'node_modules/swagger-ui-dist/swagger-ui-bundle.js',
+    'node_modules/swagger-ui-dist/swagger-ui.css',
+    'node_modules/swagger-ui-dist/favicon-32x32.png',
+    'node_modules/swagger-ui-dist/favicon-16x16.png',
+    'node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js',
+    'node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js.map',
+    'node_modules/swagger-ui-dist/swagger-ui.css.map',
+    'node_modules/swagger-ui-dist/swagger-ui-bundle.js.map',
+  ], 'public/swagger')
   .webpackConfig(config);
