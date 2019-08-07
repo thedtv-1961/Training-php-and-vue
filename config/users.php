@@ -26,5 +26,8 @@ return [
     'avatar' =>[
         'max' => 2048,
     ],
+    'birthday' => [
+        'format' => 'm/d/Y',
+    ],
     'row_per_page' => 10,
 ];
