@@ -23,6 +23,7 @@ mix.sourceMaps()
   .sass('resources/sass/change_email_requests.scss', 'public/css')
   .copy('resources/js/utils/upload_image.js', 'public/js')
   .copy('resources/images/*', 'public/images')
+  .copy('resources/js/admin/groupMember/*', 'public/js/admin/groupMember')
   .copyDirectory([
     'node_modules/swagger-ui-dist/swagger-ui-bundle.js',
     'node_modules/swagger-ui-dist/swagger-ui.css',

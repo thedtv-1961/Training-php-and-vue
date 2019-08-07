@@ -40,12 +40,16 @@
                         <td>{{ $group->name }}</td>
                         <td><img class="group-image" src="{{ $group->getImage() }}"></td>
                         <td>{{ $group->description }}</td>
-                        <td>
+                        <td class="action-group">
                             <a href="{{ route('groups.edit',$group->id) }}" class="btn btn-primary">
                                 {{ trans('common.button.edit') }}
                             </a>
-                        </td>
-                        <td>
+                            <a href="{{ route('groups.members.index',$group->id) }}" class="btn btn-info">
+                                {{ trans('common.button.member') }} <i class="fa fa-users"></i>
+                            </a>
+                            <a href="{{ route('groups.announcements.index',$group->id) }}" class="btn btn-info">
+                                {{ trans('common.button.announcement') }} <i class="fa fa-bell"></i>
+                            </a>
                             <form method="post"
                                   action="{{ route('groups.destroy', $group->id) }}"
                                   onsubmit="return confirm('{{ trans('common.button.confirm_delete') }}');">

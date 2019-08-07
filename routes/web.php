@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
     Route::group(['namespace' => 'Group'], function () {
         Route::resource('groups.announcements', 'AnnouncementController');
+        Route::resource('groups.members', 'GroupMemberController');
     });
 
     Route::resource('change_email_requests', 'ChangeEmailRequestController');

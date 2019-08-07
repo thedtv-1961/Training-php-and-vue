@@ -3,6 +3,13 @@
     height: 100px;
 }
 
+.action-group {
+    display:flex;
+    a {
+        margin-right: 2px;
+    }
+}
+
 .image-upload {
     width: 124px;
     height: 124px;
