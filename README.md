@@ -37,7 +37,6 @@ Migrate and run the default seeder.
 php artisan migrate --seed
 ```
 
-
 Install laravel passport
 
 ```bash
