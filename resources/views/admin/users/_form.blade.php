@@ -14,7 +14,9 @@
         <div class="input-group-addon">
             <i class="fa fa-at"></i>
         </div>
-        <input type="text" value="{{ $user->email }}" id="email" name="email"
+        <input type="text"
+               value="{{ empty(old('email')) ? $user->email : old('email') }}"
+               id="email" name="email"
                placeholder="{{ trans('user.attribute.email.placeholder') }}"
                class="form-control">
     </div>
@@ -29,7 +31,9 @@
         <div class="input-group-addon">
             <i class="fa fa-user"></i>
         </div>
-        <input type="text" value="{{ $user->name }}" id="name" name="name"
+        <input type="text"
+               value="{{ empty(old('name')) ? $user->name : old('name') }}"
+               id="name" name="name"
                placeholder="{{ trans('user.attribute.name.placeholder') }}"
                class="form-control">
     </div>
@@ -77,10 +81,13 @@
         </div>
         <select name="gender" id="gender" class="form-control">
             @foreach($genders as $key => $value)
-                <option value="{{ $key }}" {{ isset($user->getAttributes()['gender'])
-                && $user->getAttributes()['gender'] == $key ? 'selected':'' }}>
-                    {{ $value }}
-                </option>
+                @if(old('gender') != null && old('gender') == $key)
+                    <option value="{{ $key }}" selected>{{ $value }}</option>
+                @elseif(old('gender') == null && isset($user->getAttributes()['gender']) && $user->getAttributes()['gender'] == $key)
+                    <option value="{{ $key }}" selected>{{ $value }}</option>
+                @else
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endif
             @endforeach
         </select>
     </div>
@@ -96,7 +103,7 @@
             <i class="fa fa-calendar"></i>
         </div>
         <input type="date" class="form-control" id="birthday" name="birthday"
-               value="{{ $user->birthday }}">
+               value="{{ empty(old('birthday')) ? $user->birthday : old('birthday') }}">
     </div>
 </div>
 <!-- /Birthday-->
@@ -109,7 +116,8 @@
         <div class="input-group-addon">
             <i class="fa fa-phone"></i>
         </div>
-        <input type="text" value="{{ $user->phone }}"
+        <input type="text"
+               value="{{ empty(old('phone')) ? $user->phone : old('phone') }}"
                id="phone" name="phone"
                placeholder="{{ trans('user.attribute.phone.placeholder') }}"
                class="form-control">
@@ -125,7 +133,8 @@
         <div class="input-group-addon">
             <i class="fa fa-map-marker"></i>
         </div>
-        <input type="text" value="{{ $user->address }}"
+        <input type="text"
+               value="{{ empty(old('address')) ? $user->address : old('address') }}"
                id="address" name="address"
                placeholder="{{ trans('user.attribute.address.placeholder') }}"
                class="form-control">

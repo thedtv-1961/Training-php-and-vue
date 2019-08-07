@@ -111,14 +111,23 @@ class UserService
      */
     public function getUsers(Request $request)
     {
-        $keyword = $request->get('keyword') != '' ? $request->get('keyword') : '';
+        $id = $request->get('id') != null ? $request->get('id') : null;
+        $name = $request->get('name') != '' ? $request->get('name') : '';
+        $email = $request->get('email') != '' ? $request->get('email') : '';
+        $gender = $request->get('gender') != '' ? $request->get('gender') : '';
+        $birthday = $request->get('birthday') != null ? $request->get('birthday') : null;
         $sort = $request->get('sort') != '' ? $request->get('sort') : 'desc';
         $sortByField = $request->get('field') != '' ? $request->get('field') : 'id';
 
-        return $this->userRepository->likeSearch($keyword)
+        $users = !empty($id) ? $this->userRepository->where('id', $id) : $this->userRepository;
+
+        return $users->likeSearch($name, 'name')
+            ->likeSearch($email, 'email')
+            ->likeSearch($gender, 'gender')
+            ->likeSearch($birthday, 'birthday')
             ->orderBy($sortByField, $sort)
             ->paginate(config('users.row_per_page'))
-            ->withPath('?keyword=' . $keyword);
+            ->withPath('?id=' . $id . '&name=' . $name . '&email=' . $email . '&gender=' . $gender . '&birthday=' . $gender);
     }
 
     /**

@@ -2,6 +2,7 @@
 return [
     'attribute' => [
         'id' => [
+            'placeholder' => 'Input ID',
             'label' => 'ID',
         ],
         'email' => [
@@ -55,7 +56,8 @@ return [
             'female' => 'Female',
             'other_gender' => 'Other Gender',
         ],
-        'search' => 'Type any keyword to search...',
+        'short_link' => '?id=:id&name=:name&email=:email&gender=:gender&birthday=:birthday&field=:field&sort=:sort',
+        'all' => 'All',
     ],
     'message' => [
         'object_inserted_success' => '{0}Create user successfully',

@@ -32,12 +32,14 @@ class UserRepository extends BaseRepository implements UserInterface
     }
 
     /**
-     * @param $keyword
-     * @return Builder
+     * {@inheritDoc}
      */
-    public function likeSearch($keyword)
+    public function likeSearch($keyword, $column_name)
     {
-        return $this->model->where('name', 'LIKE', '%' . $keyword . '%')
-            ->orWhere('email', 'LIKE', '%' . $keyword . '%');
+        if (!empty($keyword)) {
+            $this->model = $this->model->where($column_name, 'LIKE', '%' . $keyword . '%');
+        }
+
+        return $this;
     }
 }
