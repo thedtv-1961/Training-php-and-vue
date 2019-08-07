@@ -1,13 +1,26 @@
+import isEmpty from 'lodash/isEmpty';
 import router from '@/router';
 import { getToken } from '@/utils/auth';
+import store from '@/store';
 
 const whiteList = ['Login', 'SignUp'];
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const hasToken = getToken();
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (hasToken) {
-      next();
+      const { user } = store.getters;
+      if (isEmpty(user)) {
+        try {
+          await store.dispatch('user/getInfo');
+          next();
+        } catch (error) {
+          await store.dispatch('user/resetToken');
+          next(`/login?redirect=${to.fullPath}`);
+        }
+      } else {
+        next();
+      }
     } else {
       next(`/login?redirect=${to.fullPath}`);
     }

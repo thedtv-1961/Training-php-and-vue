@@ -25,6 +25,9 @@ export default {
     phone: 'Phone',
     address: 'Address',
     yourGroups: 'Your Groups',
+    yourAnnouncement: 'Your Announcement',
+    nothingGroup: 'You are not belong to any group',
+    nothingAnnouncement: 'You have not announcememt',
   },
   notification: {
     empty: 'Nothing to show!',

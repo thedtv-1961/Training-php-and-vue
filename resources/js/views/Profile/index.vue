@@ -4,7 +4,7 @@
       <div class="col-12 col-md-4 mb-4">
         <div class="user__avatar m-auto">
           <img
-            :src="user.avatar"
+            :src="user.avatar ? user.avatar : defaultAvatar"
             alt="user's avatar"
             class="img-fluid img-thumbnail rounded-circle"
           >
@@ -25,6 +25,12 @@
             :item-action="true"
             @viewItem="viewGroup"
           />
+          <hr class="my-3 w-100">
+          <h3>{{ $t("user.yourAnnouncement") }}</h3>
+          <the-announcement
+            :items="announcements"
+            @viewDetail="viewAnnouncement"
+          />
         </div>
       </div>
     </div>
@@ -33,23 +39,52 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ListGroup from '@/components/ListGroup';
+import { ListGroup, TheAnnouncement } from './components';
+import typeError from '@/constant';
 
 export default {
   name: 'Profile',
   components: {
     ListGroup,
+    TheAnnouncement,
+  },
+  data() {
+    return {
+      defaultAvatar: 'https://via.placeholder.com/200',
+      getting: false,
+      isGetted: false,
+    };
   },
   computed: {
     ...mapGetters([
       'user',
       'groups',
+      'announcements',
     ]),
+  },
+  created() {
+    this.getAnnouncements();
   },
   methods: {
     viewGroup(id) {
       return id;
       // TODO navigate to user's group page
+    },
+    async getAnnouncements() {
+      try {
+        this.getting = true;
+        await this.$store.dispatch('user/getAnnouncements');
+        this.isGetted = true;
+      } catch (error) {
+        if (error.error_code === typeError.REQUEST_ERROR) {
+          this.$toasted.error(`${error.message}`);
+        }
+      } finally {
+        this.getting = false;
+      }
+    },
+    viewAnnouncement(id) {
+      return id;
     },
   },
 };

@@ -28,7 +28,21 @@ export function signOut() {
 
 export function getInfo() {
   return request({
-    url: 'api/auth/getinfo',
+    url: 'api/auth/user',
+    method: 'get',
+  });
+}
+
+export function announcements() {
+  return request({
+    url: '/api/announcements',
+    method: 'get',
+  });
+}
+
+export function announcementDetail(id) {
+  return request({
+    url: `/api/announcements/${id}`,
     method: 'get',
   });
 }
