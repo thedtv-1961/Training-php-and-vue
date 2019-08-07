@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\GroupUser;
 use Illuminate\Http\Request;
+use App\Events\UserNotification;
 use App\Http\Controllers\Controller;
+use App\Services\NotificationService;
 use App\Repositories\Group\GroupRepository;
 use App\Repositories\User\UserRepository;
 
@@ -15,20 +17,24 @@ class GroupMemberController extends Controller
     /**
      * @var GroupRepository
      * @var UserRepository
+     * @var NotificationService
     */
-    protected $groupRepository, $userRepository;
+    protected $groupRepository, $userRepository, $notificationService;
 
     /**
      * Create a new controller instance.
      *
      * @param  GroupRepository  $groupRepository
      * @param  UserRepository  $userRepository
+     * @param  NotificationService  $notificationService
      * @return void
      */
-    public function __construct(GroupRepository $groupRepository, UserRepository $userRepository)
+    public function __construct(GroupRepository $groupRepository, UserRepository $userRepository,
+        NotificationService $notificationService)
     {
         $this->groupRepository = $groupRepository;
         $this->userRepository = $userRepository;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -78,6 +84,9 @@ class GroupMemberController extends Controller
 
         $group->users()->attach($group->id, $data);
 
+        $notificationContent = $this->notificationService->getContentNotificationByGroup('add_new_member', $group->name, $data['user_id']);
+        event(new UserNotification($notificationContent, $data['user_id']));
+
         return redirect()
             ->action('Admin\Group\GroupMemberController@index', $group->id)
             ->with('message_class', 'success')
@@ -95,8 +104,10 @@ class GroupMemberController extends Controller
     public function destroy(Group $group, Request $request, $userId)
     {
         $user = $group->users()->detach($userId);
-        if ($user)
-        {
+        if ($user) {
+            $notificationContent = $this->notificationService->getContentNotificationByGroup('remove_member', $group->name, $userId);
+            event(new UserNotification($notificationContent, $userId));
+
             return redirect()
             ->action('Admin\Group\GroupMemberController@index', $group->id)
             ->with('message_class', 'success')

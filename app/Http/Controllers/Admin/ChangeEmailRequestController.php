@@ -6,31 +6,36 @@ use DB;
 use Auth;
 use App\Models\ChangeEmailRequest;
 use Illuminate\Http\Request;
+use App\Events\UserNotification;
 use App\Http\Controllers\Controller;
+use App\Services\NotificationService;
 use App\Repositories\User\UserRepository;
 use App\Repositories\ChangeEmailRequest\ChangeEmailRequestRepository;
 
 class ChangeEmailRequestController extends Controller
 {
-    /** 
+    /**
      * @var ChangeEmailRequestRepository
      * @var UserRepository
-     * 
+     * @var NotificationService
+     *
     */
-    protected $changeEmailRequestRepository, $userRepository;
+    protected $changeEmailRequestRepository, $userRepository, $notificationService;
 
     /**
      * Create a new controller instance.
      *
      * @param  ChangeEmailRequestRepository  $changeEmailRequestRepository
      * @param  UserRepository  $userRepository
+     * @param  NotificationService  $notificationService
      * @return void
      */
     public function __construct(
         ChangeEmailRequestRepository $changeEmailRequestRepository,
-        UserRepository $userRepository) {
+        UserRepository $userRepository, NotificationService  $notificationService) {
         $this->changeEmailRequestRepository = $changeEmailRequestRepository;
         $this->userRepository = $userRepository;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -78,7 +83,11 @@ class ChangeEmailRequestController extends Controller
             } else {
                 $changeEmailRequest = $this->changeEmailRequestRepository
                                         ->update($id, ['status' => $request->status, 'admin_id' => Auth::user()->id]);
+
             }
+            $message = $request->status == config('change_email_requests.status.approved') ? 'approved' : 'rejected';
+            $notificationContent = $this->notificationService->getContentNotification($message, $changeEmailRequest->user_id);
+            event(new UserNotification($notificationContent, $changeEmailRequest->user_id));
             DB::commit();
 
             return back()
