@@ -36,7 +36,7 @@ class GroupController extends Controller
         $search = $request->get('search');
         $field = $request->get('field') != '' ? $request->get('field') : 'name';
         $sort = $request->get('sort') != '' ? $request->get('sort') : 'asc';
-        $groups = $this->groupRepository->likeSearch('name', $search)->orderBy($field, $sort)->paginate(10)
+        $groups = $this->groupRepository->likeSearch(['id', 'name'], $search)->orderBy($field, $sort)->paginate(10)
             ->withPath('?search=' . $search . '&field=' . $field . '&sort=' . $sort);
 
         return view('admin.groups.index', compact('groups'));
@@ -64,7 +64,9 @@ class GroupController extends Controller
     {
         $group = $this->groupRepository->create($this->groupParams($request));
 
-        return redirect('/admin/groups');
+        return redirect('/admin/groups')
+            ->with('message_class', 'success')
+            ->with('message', trans('group.message.create_success'));
     }
 
     /**
@@ -89,7 +91,9 @@ class GroupController extends Controller
     {
         $group->update($this->groupParams($request));
 
-        return redirect('/admin/groups');
+        return redirect('/admin/groups')
+            ->with('message_class', 'success')
+            ->with('message', trans('group.message.update_success'));
     }
 
     /**
@@ -100,9 +104,15 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        $group->delete();
+        if ($group->delete()) {
+            return redirect('/admin/groups')
+                ->with('message_class', 'success')
+                ->with('message', trans('group.message.destroy_success'));
+        }
 
-        return redirect('/admin/groups');
+        return redirect('/admin/groups')
+                ->with('message_class', 'danger')
+                ->with('message', trans('group.message.destroy_fail'));
     }
 
     private function groupParams($request)

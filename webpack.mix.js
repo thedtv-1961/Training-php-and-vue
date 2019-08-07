@@ -15,6 +15,7 @@ const config = require('./webpack.config');
 mix.sourceMaps()
   .js('resources/js/app.js', 'public/js')
   .js('resources/js/swagger.js', 'public/js')
+  .js('resources/js/utils/alert.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .sass('resources/sass/user.scss', 'public/css')
   .sass('resources/sass/announcements.scss', 'public/css')

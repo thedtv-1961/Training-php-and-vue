@@ -1,10 +1,12 @@
-<div class="form-group">
+<div class="form-group {{ $errors->has('name') ? 'has-error':'' }}">
     <label for="first_name">{{ trans('group.attribute.name.label') }}</label>
-    <input type="text" class="form-control" name="name" value="{{ $group->name }}"/>
+    <p class="error_message">{{ $errors->first('name') }}</p>
+    <input type="text" class="form-control" name="name" value="{{ (old('name')) ?  old('name') : $group->name}}"/>
 </div>
-<div class="form-group">
+<div class="form-group {{ $errors->has('description') ? 'has-error':'' }}">
     <label for="last_name">{{ trans('group.attribute.description.label') }}</label>
-    <input type="text" class="form-control" name="description" value="{{ $group->description }}"/>
+    <p class="error_message">{{ $errors->first('description') }}</p>
+    <input type="text" class="form-control" name="description" value="{{ (old('description')) ?  old('description') : $group->description}}"/>
 </div>
 
 <div class="form-group">
