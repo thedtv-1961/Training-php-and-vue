@@ -95,3 +95,56 @@ p.error_message {
         }
     }
 }
+
+.btn-forward {
+    float: left;
+    display: inline;
+    margin-top: 5px;
+}
+
+.title-name {
+    display: inline;
+}
+
+.frm-filter {
+    .label-text {
+        display: inline;
+    }
+
+    .field-control {
+        display: inline;
+        width: 78%;
+        margin-left: 10px;
+    }
+    .field-control-email {
+        width: 69%;
+    }
+
+    .label-field-gender {
+        margin: 0;
+    }
+
+    .label-field-gender input {
+        margin: 0;
+    }
+
+    .id-form-field {
+        width: 12%;
+    }
+
+    .form-header-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 5px 0px;
+        background-color: #f9f9f9;
+        border: 1px solid #3c8cbc;
+    }
+    .lb-rad-gender{
+        font-weight: normal;
+        padding-right: 8px;
+    }
+    .lb-gender{
+        margin-right: 8px;
+    }
+}
