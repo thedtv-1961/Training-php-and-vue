@@ -8,6 +8,9 @@
 </template>
 
 <script>
+import Echo from 'laravel-echo';
+
+import { getToken } from '@/utils/auth';
 import { TheHeader, AppMain } from './components';
 
 export default {
@@ -15,6 +18,18 @@ export default {
   components: {
     TheHeader,
     AppMain,
+  },
+  created() {
+    window.io = require('socket.io-client');
+    window.Echo = new Echo({
+      broadcaster: 'socket.io',
+      host: `${process.env.MIX_VUE_APP_BASE_API}:6001`,
+      auth: {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      },
+    });
   },
 };
 </script>

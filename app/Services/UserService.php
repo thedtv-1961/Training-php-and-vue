@@ -42,6 +42,7 @@ class UserService
                 'phone',
                 'address',
                 'avatar',
+                'password',
             ]);
 
             if (isset($request['avatar'])) {

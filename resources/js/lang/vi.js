@@ -26,4 +26,8 @@ export default {
     address: 'Địa chỉ',
     yourGroups: 'Nhóm của bạn',
   },
+  notification: {
+    empty: 'Không có thông báo nào!',
+    markAsRead: 'Đã đọc',
+  },
 };
