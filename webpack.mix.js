@@ -20,6 +20,7 @@ mix.sourceMaps()
   .sass('resources/sass/announcements.scss', 'public/css')
   .sass('resources/sass/edit_announcement.scss', 'public/css')
   .sass('resources/sass/group.scss', 'public/css')
+  .sass('resources/sass/change_email_requests.scss', 'public/css')
   .copy('resources/js/utils/upload_image.js', 'public/js')
   .copy('resources/images/*', 'public/images')
   .copyDirectory([
