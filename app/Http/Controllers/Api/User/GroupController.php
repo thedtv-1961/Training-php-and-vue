@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\User\UserInterface;
+use App\Http\Resources\Group as GroupResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GroupController extends Controller
@@ -37,6 +38,6 @@ class GroupController extends Controller
     {
         $groups = auth()->user()->groups;
 
-        return response()->json($groups);
+        return GroupResource::collection($groups);
     }
 }
