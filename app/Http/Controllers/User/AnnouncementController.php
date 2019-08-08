@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AnnouncementController extends Controller
 {
 
-    /** 
+    /**
      * @var  announcementRepository
-     * 
+     *
     */
     protected $announcementRepository;
 
@@ -20,7 +20,7 @@ class AnnouncementController extends Controller
      * Create a new controller instance.
      *
      * @param  AnnouncementInterface  $announcementRepository
-     * 
+     *
      * @return void
      */
     public function __construct(AnnouncementInterface $announcementRepository)
@@ -55,7 +55,6 @@ class AnnouncementController extends Controller
 
             return response()->json($annoncement);
         } catch (ModelNotFoundException $e) {
-            
             return response()->json([
                 'error_message' => $e->getMessage(),
                 'error_code' => 404,

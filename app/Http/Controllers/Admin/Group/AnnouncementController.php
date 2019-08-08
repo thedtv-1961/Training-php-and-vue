@@ -23,7 +23,8 @@ class AnnouncementController extends Controller
      * @param  GroupRepository  $groupRepository
      * @return void
      */
-    public function __construct(GroupRepository $groupRepository) {
+    public function __construct(GroupRepository $groupRepository)
+    {
         $this->groupRepository = $groupRepository;
     }
 
@@ -73,11 +74,12 @@ class AnnouncementController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $announcement_id
+     * @param  int  $announcementId
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group, $announcement_id) {
-        $announcement = $group->announcements->find($announcement_id);
+    public function edit(Group $group, $announcementId)
+    {
+        $announcement = $group->announcements->find($announcementId);
 
         return view('admin.group.announcements.edit', compact('group', 'announcement'));
     }
@@ -86,13 +88,13 @@ class AnnouncementController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $announcement_id
+     * @param  int  $announcementId
      * @return \Illuminate\Http\Response
      */
-    public function update(AnnouncementRequest $request, Group $group, $announcement_id)
+    public function update(AnnouncementRequest $request, Group $group, $announcementId)
     {
         $validated = $request->validated();
-        $announcement = $group->announcements->find($announcement_id);
+        $announcement = $group->announcements->find($announcementId);
         $announcement->update($request->all());
 
         return redirect()->route('groups.announcements.index', $group->id);
@@ -105,10 +107,10 @@ class AnnouncementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($group_id, Request $request, Announcement $announcement)
+    public function destroy($groupId, Request $request, Announcement $announcement)
     {
         $announcement->destroy($announcement->id);
 
-        return redirect()->route('groups.announcements.index', $group_id);
+        return redirect()->route('groups.announcements.index', $groupId);
     }
 }

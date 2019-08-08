@@ -15,12 +15,17 @@ use App\Repositories\User\UserRepository;
 class GroupMemberController extends Controller
 {
     /**
-     * @var GroupRepository
-     * @var UserRepository
      * @var NotificationService
     */
-    protected $groupRepository, $userRepository, $notificationService;
-
+    protected $notificationService;
+    /**
+     * @var UserRepository
+    */
+    protected $userRepository;
+    /**
+     * @var GroupRepository
+    */
+    protected $groupRepository;
     /**
      * Create a new controller instance.
      *
@@ -29,9 +34,11 @@ class GroupMemberController extends Controller
      * @param  NotificationService  $notificationService
      * @return void
      */
-    public function __construct(GroupRepository $groupRepository, UserRepository $userRepository,
-        NotificationService $notificationService)
-    {
+    public function __construct(
+        GroupRepository $groupRepository,
+        UserRepository $userRepository,
+        NotificationService $notificationService
+    ) {
         $this->groupRepository = $groupRepository;
         $this->userRepository = $userRepository;
         $this->notificationService = $notificationService;
@@ -60,7 +67,7 @@ class GroupMemberController extends Controller
     {
         $users = $this->userRepository->all();
 
-        return view('admin.group.members.create', ['group' => $group, 'users'=>$users]);
+        return view('admin.group.members.create', ['group' => $group, 'users' => $users]);
     }
 
     /**
@@ -73,9 +80,8 @@ class GroupMemberController extends Controller
     public function store(Group $group, Request $request)
     {
         $data = $request->only(['user_id']);
-        $result = $group->users()->where('user_id',$data['user_id'])->first();
-        if ($result)
-        {
+        $result = $group->users()->where('user_id', $data['user_id'])->first();
+        if ($result) {
             return redirect()
                 ->action('Admin\Group\GroupMemberController@create', $group->id)
                 ->with('message_class', 'danger')
@@ -84,7 +90,8 @@ class GroupMemberController extends Controller
 
         $group->users()->attach($group->id, $data);
 
-        $notificationContent = $this->notificationService->getContentNotificationByGroup('add_new_member', $group->name, $data['user_id']);
+        $notificationContent = $this->notificationService
+            ->getContentNotificationByGroup('add_new_member', $group->name, $data['user_id']);
         event(new UserNotification($notificationContent, $data['user_id']));
 
         return redirect()
@@ -105,7 +112,8 @@ class GroupMemberController extends Controller
     {
         $user = $group->users()->detach($userId);
         if ($user) {
-            $notificationContent = $this->notificationService->getContentNotificationByGroup('remove_member', $group->name, $userId);
+            $notificationContent = $this->notificationService
+                ->getContentNotificationByGroup('remove_member', $group->name, $userId);
             event(new UserNotification($notificationContent, $userId));
 
             return redirect()

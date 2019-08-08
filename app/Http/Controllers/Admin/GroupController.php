@@ -118,5 +118,4 @@ class GroupController extends Controller
 
         return $group;
     }
-
 }

@@ -26,7 +26,7 @@ interface BaseInterface
     public function onlyTrashed();
 
     /**
-     * 
+     *
      */
     public function makeModel();
 
@@ -39,7 +39,7 @@ interface BaseInterface
 
     /**
      *  Paginate the given query.
-     * 
+     *
      */
     public function paginate($limit = null, $columns = ['*']);
 

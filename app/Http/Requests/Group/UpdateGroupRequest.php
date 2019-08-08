@@ -33,5 +33,4 @@ class UpdateGroupRequest extends FormRequest
             'image' => 'max:' . config('groups.image.max'),
         ];
     }
-
 }

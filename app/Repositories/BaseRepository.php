@@ -68,7 +68,8 @@ abstract class BaseRepository implements BaseInterface
         $model = $this->app->make($this->getModel());
 
         if (!$model instanceof Model) {
-            throw new Exception("Class {$this->getModel()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+            $error = "Class {$this->getModel()} must be an instance of Illuminate\\Database\\Eloquent\\Model";
+            throw new Exception($error);
         }
 
         return $this->model = $model;
@@ -247,7 +248,6 @@ abstract class BaseRepository implements BaseInterface
 
     public function forceDelete()
     {
-
         return $this->model->forceDelete();
     }
 
@@ -306,7 +306,7 @@ abstract class BaseRepository implements BaseInterface
             $relationships = func_get_args();
         }
 
-        $this->model = $this->model->with($relationships);   
+        $this->model = $this->model->with($relationships);
 
         return $this;
     }

@@ -16,9 +16,9 @@ class ProfileController extends Controller
 {
     use FileProcesser;
 
-    /** 
+    /**
      * @var userRepository
-     * 
+     *
     */
     protected $userRepository;
 
@@ -54,7 +54,7 @@ class ProfileController extends Controller
      * @param  int  $id
      *
      * @return Illuminate\Http\JsonResponse
-     * 
+     *
      * @throws Exception
      */
     public function update(UpdateUserRequest $request, $id)
@@ -80,9 +80,9 @@ class ProfileController extends Controller
     /**
      * Change user avatar
      * @param  UploadImageRequest  $request
-     * 
+     *
      * @return Illuminate\Http\JsonResponse
-     * 
+     *
      * @throws Exception
      */
     public function changeAvatar(UploadImageRequest $request)

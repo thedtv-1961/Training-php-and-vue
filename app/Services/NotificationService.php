@@ -15,17 +15,16 @@ class NotificationService
         return [
             'message' => $message . $groupName,
             'userId' => $userId,
-            'read' => false
+            'read' => false,
         ];
     }
 
     public function getContentNotification($action, $userId)
     {
-
         return [
             'message' => __('notification.' . $action),
             'userId' => $userId,
-            'read' => false
+            'read' => false,
         ];
     }
 }

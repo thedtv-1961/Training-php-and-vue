@@ -29,5 +29,4 @@ class CreateGroupRequest extends FormRequest
             'image' => 'max:' . config('groups.image.max'),
         ];
     }
-
 }

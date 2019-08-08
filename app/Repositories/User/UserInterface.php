@@ -10,7 +10,7 @@ interface UserInterface
      * @param  string  $name
      * @param  string  $oldAvatarName
      * @param  string  $pathUpload
-     * 
+     *
      * @return mixed
      */
     public function uploadAvatar($request, $name, $oldAvatarName, $pathUpload);
