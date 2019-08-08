@@ -49,7 +49,7 @@ Route::group(['namespace' => 'User', 'middleware' => 'auth:api'], function () {
 });
 
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function () {
-    Route::group(['namespace' => 'User', 'middleware' => 'auth:api'], function () {
+    Route::group(['namespace' => 'User'], function () {
         Route::apiResource('groups', 'GroupController', [
             'only' => [
                 'index'
