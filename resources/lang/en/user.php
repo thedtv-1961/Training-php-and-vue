@@ -75,4 +75,14 @@ return [
         'create' => 'Create new User',
         'edit' => 'Edit User',
     ],
+    'profile' => [
+        'title' => 'Profile',
+        'change_avatar' => 'Change avatar',
+        'update' => [
+            'success' => 'Update successfully!',
+            'avatar' => [
+                'success' => 'Change avatar successfully!',
+            ],
+        ],
+    ],
 ];
