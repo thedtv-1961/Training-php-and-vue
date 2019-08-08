@@ -37,7 +37,7 @@ Route::group(['namespace' => 'User', 'middleware' => 'auth:api'], function () {
             'update',
         ]
     ]);
-    
+
     Route::post('/change-avatar', 'ProfileController@changeAvatar');
 
     Route::apiResource('announcements', 'AnnouncementController', [
@@ -46,6 +46,8 @@ Route::group(['namespace' => 'User', 'middleware' => 'auth:api'], function () {
             'show',
         ]
     ]);
+
+    Route::patch('notifications', 'NotificationController@update');
 });
 
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function () {

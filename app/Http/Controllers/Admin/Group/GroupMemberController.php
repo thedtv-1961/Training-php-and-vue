@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 use App\Events\UserNotification;
 use App\Http\Controllers\Controller;
 use App\Services\NotificationService;
-use App\Repositories\Group\GroupRepository;
 use App\Repositories\User\UserRepository;
+use App\Repositories\Group\GroupRepository;
+use App\Notifications\ReceiveNotifications;
 
 class GroupMemberController extends Controller
 {
@@ -92,7 +93,7 @@ class GroupMemberController extends Controller
 
         $notificationContent = $this->notificationService
             ->getContentNotificationByGroup('add_new_member', $group->name, $data['user_id']);
-        event(new UserNotification($notificationContent, $data['user_id']));
+        $this->userRepository->find($data['user_id'])->notify(new ReceiveNotifications($notificationContent));
 
         return redirect()
             ->action('Admin\Group\GroupMemberController@index', $group->id)
@@ -114,7 +115,7 @@ class GroupMemberController extends Controller
         if ($user) {
             $notificationContent = $this->notificationService
                 ->getContentNotificationByGroup('remove_member', $group->name, $userId);
-            event(new UserNotification($notificationContent, $userId));
+            $this->userRepository->find($userId)->notify(new ReceiveNotifications($notificationContent));
 
             return redirect()
             ->action('Admin\Group\GroupMemberController@index', $group->id)

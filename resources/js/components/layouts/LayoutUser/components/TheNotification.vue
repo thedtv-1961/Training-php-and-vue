@@ -17,9 +17,9 @@
           v-for="notification in notifications"
           :key="notification.id"
           class="dropdown-item d-flex align-items-center justify-content-between notification__item"
-          :class="{ 'bg-info': !notification.read }"
+          :class="{ 'bg-info': !notification.thread.read }"
         >
-          {{ notification.message }}
+          {{ notification.thread.message }}
           <span
             v-if="!notification.read"
             class="btn btn-dark btn-sm ml-2"
@@ -54,7 +54,7 @@ export default {
       auth: 'user',
     }),
     unReadNotification() {
-      return this.notifications.filter(notification => !notification.read).length;
+      return this.notifications.filter(notification => !notification.thread.read).length;
     },
   },
   created() {
@@ -62,9 +62,9 @@ export default {
     if (token) {
       this.getNotification();
       window.Echo.private(`App.User.${this.auth.user.id}`)
-        .listen('UserNotification', (event) => {
-          this.$toasted.success(event.notification.message);
-          this.notifications.unshift(event.notification);
+        .notification((notification) => {
+          this.$toasted.success(notification.thread.message);
+          this.notifications.unshift(notification);
         });
     }
   },
@@ -81,7 +81,7 @@ export default {
       try {
         await markAsRead(id);
         const index = this.notifications.findIndex(noti => noti.id === id);
-        this.notifications[index].read = true;
+        this.notifications[index].thread.read = true;
       } catch (error) {
         this.errors = error;
       }
