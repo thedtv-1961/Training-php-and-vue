@@ -49,7 +49,7 @@
                                             {{ csrf_field() }}
                                             {{ method_field('PATCH') }}
                                             <input name="status" type="hidden" value="1">
-                                            <button type="submit"  class="btn btn-primary">{{ trans('change_email_requests.index.approve') }}</button>
+                                            <button type="submit" onclick="return confirm('{{ trans('change_email_requests.confirm_message') }}')" class="btn btn-primary">{{ trans('change_email_requests.index.approve') }}</button>
                                         </form>
                                     </div>
                                     <div class="btn_reject">
@@ -57,7 +57,7 @@
                                             {{ csrf_field() }}
                                             {{ method_field('PATCH') }}
                                             <input name="status" type="hidden" value="2">
-                                            <button type="submit"  class="btn btn-danger">{{ trans('change_email_requests.index.reject') }}</button>
+                                            <button type="submit" onclick="return confirm('{{ trans('change_email_requests.confirm_message') }}')" class="btn btn-danger">{{ trans('change_email_requests.index.reject') }}</button>
                                         </form>
                                     </div>
                                 @else

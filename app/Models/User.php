@@ -39,7 +39,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-    'remember_token',
+        'remember_token',
     ];
 
     /**
@@ -63,6 +63,10 @@ class User extends Authenticatable
      */
     public function getGenderAttribute()
     {
+        if (empty($this->attributes['gender'])) {
+            return null;
+        }
+
         switch ($this->attributes['gender']) {
             case config('users.gender.male'):
                 return trans('user.variable.gender.male');
