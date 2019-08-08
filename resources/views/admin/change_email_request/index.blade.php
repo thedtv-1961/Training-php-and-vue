@@ -8,23 +8,26 @@
 <div class="panel-body button_add">
 </div>
 
-@if (count($changeEmailRequests) > 0)
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>
-                <b>{{ trans('change_email_requests.index.change_email_requests_management') }}</b>
-            </h3>
-        </div>
-        <div class="panel-body">
-            <div class="col-md-12">
-                <table class="table table-striped ">
-                    <thead>
-                        <th>{{ trans('change_email_requests.index.user_name') }}</th>
-                        <th>{{ trans('change_email_requests.index.email_change') }}</th>
-                        <th>{{ trans('change_email_requests.index.status') }}</th>
-                        <th colspan="2">{{ trans('change_email_requests.index.action') }}</th>
-                    </thead>
-                    <tbody>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+            <b>{{ trans('change_email_requests.index.change_email_requests_management') }}</b>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+
+            @include('admin.notifies._message')
+
+            <table class="table table-striped ">
+                <thead>
+                    <th>{{ trans('change_email_requests.index.user_name') }}</th>
+                    <th>{{ trans('change_email_requests.index.email_change') }}</th>
+                    <th>{{ trans('change_email_requests.index.status') }}</th>
+                    <th colspan="2">{{ trans('change_email_requests.index.action') }}</th>
+                </thead>
+                <tbody>
+                @if (count($changeEmailRequests) > 0)
                     @foreach ($changeEmailRequests  as $changeEmailRequest)
                         <tr>
                             <td>
@@ -40,21 +43,39 @@
                             </td>
 
                             <td>
-                                <div class="btn_approve">
-                                    <button type="button" class="btn btn-primary">{{ trans('change_email_requests.index.approve') }}</button>
-                                </div>
-                                <div class="btn_reject">
-                                    <button type="submit"  class="btn btn-danger">{{ trans('change_email_requests.index.reject') }}</button>
-                                </div>
+                                @if ($changeEmailRequest->status == 'Pending')
+                                    <div class="btn_approve">
+                                        <form action="{{route('change_email_requests.update', [$changeEmailRequest->id])}}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PATCH') }}
+                                            <input name="status" type="hidden" value="1">
+                                            <button type="submit"  class="btn btn-primary">{{ trans('change_email_requests.index.approve') }}</button>
+                                        </form>
+                                    </div>
+                                    <div class="btn_reject">
+                                        <form action="{{route('change_email_requests.update', [$changeEmailRequest->id])}}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PATCH') }}
+                                            <input name="status" type="hidden" value="2">
+                                            <button type="submit"  class="btn btn-danger">{{ trans('change_email_requests.index.reject') }}</button>
+                                        </form>
+                                    </div>
+                                @else
+                                    <div class="btn_approve">
+                                        <button type="submit"  class="btn btn-primary" disabled= "true">{{ trans('change_email_requests.index.approve') }}</button>
+                                    </div>
+                                    <div class="btn_reject">
+                                        <button type="submit"  class="btn btn-danger" disabled= "true">{{ trans('change_email_requests.index.reject') }}</button>
+                                    </div>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
-                    </tbody>
-                </table>
-                {{ $changeEmailRequests->links() }}
-            </div>
+                @endif
+                </tbody>
+            </table>
+            {{ $changeEmailRequests->links() }}
         </div>
-    </div> 
-@endif
-
+    </div>
+</div> 
 @endsection
