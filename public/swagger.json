@@ -20,3 +20,45 @@ definitions:
         description: "User email"
     xml:
       name: "User"
+paths:
+  /change-email-request:
+    post:
+      tags:
+      - "Change Email Request"
+      summary: "Add a new change email request"
+      description: ""
+      operationId: "addChangeEmailRequest"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "email_change"
+        description: "New Email"
+        required: true
+        format: "string"
+      - in: "body"
+        name: "user_id"
+        description: "ID of User"
+        required: true
+        format: "int64"
+      - in: "body"
+        name: "status"
+        description: "status of change email request, Status 0 is pending status"
+        required: true
+        format: "int64"
+        default: 0
+      responses:
+        '200':
+          description: "The request has succeeded"
+        '422':
+          description: "Validate fail"
+        '404':
+          description: "Request Not Found"
+      securitySchemes:
+        BearerAuth:
+          type: http
+          scheme: bearer
