@@ -9,15 +9,12 @@
 @section('content')
     @include('admin.notifies._message')
     <div class="row">
-        <div>
-            <div class="col-md-4">
-                @include('admin.users._search_form')
-            </div>
-            <div class="text-right col-md-8">
-                <a href="{{ route('users.create')}}" class="btn btn-primary">
-                    {{ trans('common.button.create') }}
-                </a>
-            </div>
+        @include('admin.users._search_form')
+        <div class="text-right col-md-12">
+            <a href="{{ route('users.create')}}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                {{ trans('common.button.create') }}
+            </a>
         </div>
         <div class="col-md-12">
             <table class="table table-striped table-users">
@@ -26,22 +23,54 @@
                     <th>{{ trans('user.attribute.id.label') }}</th>
                     <th>{{ trans('user.attribute.avatar.label') }}</th>
                     <th>
-                        <a href="?keyword={{ request('keyword') }}&field=name&sort={{ request('sort') == 'asc' ? 'desc' : 'asc' }}&page={{ request('page') }}">
+                        <a href="{{trans('user.variable.short_link', [
+                            'id' => request('id'),
+                            'name' => request('name'),
+                            'email' => request('email'),
+                            'gender' => request('gender'),
+                            'birthday' => request('birthday'),
+                            'field'=>'name',
+                            'sort'=> request('sort') == 'asc' ? 'desc' : 'asc',
+                         ])}}">
                             {{ trans('user.attribute.name.label') }}
                         </a>
                     </th>
                     <th>
-                        <a href="?keyword={{ request('keyword') }}&field=email&sort={{ request('sort') == 'asc' ? 'desc' : 'asc' }}&page={{ request('page') }}">
+                        <a href="{{trans('user.variable.short_link', [
+                            'id' => request('id'),
+                            'name' => request('name'),
+                            'email' => request('email'),
+                            'gender' => request('gender'),
+                            'birthday' => request('birthday'),
+                            'field'=>'email',
+                            'sort'=> request('sort') == 'asc' ? 'desc' : 'asc',
+                         ])}}">
                             {{ trans('user.attribute.email.label') }}
                         </a>
                     </th>
                     <th>
-                        <a href="?keyword={{ request('keyword') }}&field=birthday&sort={{ request('sort') == 'asc' ? 'desc' : 'asc' }}&page={{ request('page') }}">
+                        <a href="{{trans('user.variable.short_link', [
+                            'id' => request('id'),
+                            'name' => request('name'),
+                            'email' => request('email'),
+                            'gender' => request('gender'),
+                            'birthday' => request('birthday'),
+                            'field'=>'birthday',
+                            'sort'=> request('sort') == 'asc' ? 'desc' : 'asc',
+                         ])}}">
                             {{ trans('user.attribute.birthday.label') }}
                         </a>
                     </th>
                     <th>
-                        <a href="?keyword={{ request('keyword') }}&field=gender&sort={{ request('sort') == 'asc' ? 'desc' : 'asc' }}&page={{ request('page') }}">
+                        <a href="{{trans('user.variable.short_link', [
+                            'id' => request('id'),
+                            'name' => request('name'),
+                            'email' => request('email'),
+                            'gender' => request('gender'),
+                            'birthday' => request('birthday'),
+                            'field'=>'gender',
+                            'sort'=> request('sort') == 'asc' ? 'desc' : 'asc',
+                         ])}}">
                             {{ trans('user.attribute.gender.label') }}
                         </a>
                     </th>
@@ -59,7 +88,7 @@
                         </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->birthday }}</td>
+                        <td>{{ date_format(new DateTime($user->birthday), config('users.birthday.format')) }}</td>
                         <td>{{ $user->gender }}</td>
                         <td>
                             <a href="{{ route('users.edit',$user->id) }}"

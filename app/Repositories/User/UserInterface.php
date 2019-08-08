@@ -16,8 +16,9 @@ interface UserInterface
     public function uploadAvatar($request, $name, $oldAvatarName, $pathUpload);
 
     /**
-     * @param  $keyword
+     * @param  object  $keyword
+     * @param  string  $columnName
      * @return BuilderObject
      */
-    public function likeSearch($keyword);
+    public function likeSearch($keyword, $columnName);
 }
