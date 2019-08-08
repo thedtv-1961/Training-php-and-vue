@@ -6,6 +6,7 @@ const state = {
   tokenType: '',
   expiresAt: '',
   user: {},
+  groups: [],
 };
 
 const mutations = {
