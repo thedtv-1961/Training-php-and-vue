@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Storage;
+use App\Models\Role;
+use App\Models\Group;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -87,5 +89,39 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    /*
+     *  Define roles relationship
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Get group_ids attributes
+     */
+    public function getGroupIdsAttribute()
+    {
+        return $this->groups->pluck('id')->all();
+    }
+
+    /**
+     * Determine if the user has a role.
+     * 
+     * @param  string  $roleSlug
+     * 
+     * @return bool
+     */
+    public function hasRole($roleSlug)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->slug == $roleSlug) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
