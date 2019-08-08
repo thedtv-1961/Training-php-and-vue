@@ -46,4 +46,10 @@ Route::group(['namespace' => 'User', 'middleware' => 'auth:api'], function () {
             'show',
         ]
     ]);
+
+    Route::apiResource('groups', 'GroupController', [
+        'only' => [
+            'index'
+        ]
+    ]);
 });
