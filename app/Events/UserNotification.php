@@ -19,25 +19,14 @@ class UserNotification implements ShouldBroadcast
 
     /**
      * Create a new event instance.
-     *
+     * @param  object  $message
+     * @param  int  $userId
      * @return void
      */
-    public function __construct($notification)
+    public function __construct($message, $userId)
     {
-        $this->notification = $notification;
-        /**
-         * TODO please implement a notification at least has these fields:
-         * notification(id, message, userId, read)
-         * ex:
-         * notification = [
-         *  'id' => 3,
-         *  'message' => 'You have a notification!',
-         *  'userId' => 38,
-         *  'read' => false
-         * ];
-         * @return void
-         */
-        $this->userId = $this->notification['userId'];
+        $this->notification = $message;
+        $this->userId = $userId;
     }
 
     /**
