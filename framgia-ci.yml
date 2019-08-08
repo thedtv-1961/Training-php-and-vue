@@ -39,8 +39,8 @@ test:
       app
   phpcs:
     ignore: false
-    command: echo '' | ~/.config/composer/vendor/bin/phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml --ignore=app/Supports/* app
-    auto_fix: ~/.config/composer/vendor/bin/phpcbf --standard=Framgia app
+    command: echo '' | phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml --ignore=app/Supports/* app
+    auto_fix: phpcbf --standard=Framgia app
   phpunit:
     ignore: false
     command:
