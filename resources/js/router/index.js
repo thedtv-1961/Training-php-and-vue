@@ -16,6 +16,7 @@ export const constantRoutes = [
   {
     path: '/',
     name: 'Home',
+    redirect: '/login',
     component: () => import(/* webpackChunkName:"Home" */'@/views/Home/index'),
     meta: {
       guest: true,
@@ -42,7 +43,7 @@ export const constantRoutes = [
     name: 'UserApp',
     hidden: false,
     alwaysShow: true,
-    redirect: '/app/profile',
+    redirect: '/app/announcements',
     component: () => import(/* webpackChunkName:"LayoutUser" */'@/components/layouts/LayoutUser'),
     meta: {
       requiresAuth: true,
@@ -56,6 +57,14 @@ export const constantRoutes = [
           requiresAuth: true,
         },
       },
+      {
+        path: 'announcements',
+        name: 'Announcements',
+        component: () => import(/* webpackChunkName:"Profile" */'@/views/Announcements/index'),
+        meta: {
+          requiresAuth: true,
+        },
+      },
     ],
   },
   { path: '*', redirect: '/404', hidden: true },
@@ -65,6 +74,7 @@ const createRouter = () => new Router({
   mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes,
+  linkActiveClass: 'active',
 });
 
 const router = createRouter();

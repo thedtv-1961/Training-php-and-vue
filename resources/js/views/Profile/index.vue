@@ -4,7 +4,7 @@
       <div class="col-12 col-md-4 mb-4">
         <div class="user__avatar m-auto">
           <img
-            :src="user.avatar"
+            :src="user.avatar ? user.avatar : defaultAvatar"
             alt="user's avatar"
             class="img-fluid img-thumbnail rounded-circle"
           >
@@ -20,11 +20,7 @@
           <p><b>{{ $t("user.address") }}: </b>{{ user.address }}</p>
           <hr class="my-3 w-100">
           <h3>{{ $t("user.yourGroups") }}</h3>
-          <list-group
-            :items="groups"
-            :item-action="true"
-            @viewItem="viewGroup"
-          />
+          <list-group :items="groups" />
         </div>
       </div>
     </div>
@@ -33,24 +29,25 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ListGroup from '@/components/ListGroup';
+import { ListGroup } from './components';
 
 export default {
   name: 'Profile',
   components: {
     ListGroup,
   },
+  data() {
+    return {
+      defaultAvatar: 'https://via.placeholder.com/200',
+      getting: false,
+      isGetted: false,
+    };
+  },
   computed: {
     ...mapGetters([
       'user',
       'groups',
     ]),
-  },
-  methods: {
-    viewGroup(id) {
-      return id;
-      // TODO navigate to user's group page
-    },
   },
 };
 </script>

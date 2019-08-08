@@ -20,20 +20,24 @@
       class="collapse navbar-collapse"
     >
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a
+        <li class="nav-item">
+          <router-link
+            to="/app/announcements"
             class="nav-link"
-            href="#"
-          >{{ $t("route.profile") }}</a>
+          >
+            {{ $t("route.groups") }}
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link
+            to="/app/profile"
+            class="nav-link"
+          >
+            {{ $t("route.profile") }}
+          </router-link>
         </li>
         <li class="nav-item">
           <the-notification />
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-          >{{ $t("route.groups") }}</a>
         </li>
         <li class="nav-item">
           <button
