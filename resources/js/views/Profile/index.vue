@@ -20,17 +20,7 @@
           <p><b>{{ $t("user.address") }}: </b>{{ user.address }}</p>
           <hr class="my-3 w-100">
           <h3>{{ $t("user.yourGroups") }}</h3>
-          <list-group
-            :items="groups"
-            :item-action="true"
-            @viewItem="viewGroup"
-          />
-          <hr class="my-3 w-100">
-          <h3>{{ $t("user.yourAnnouncement") }}</h3>
-          <the-announcement
-            :items="announcements"
-            @viewDetail="viewAnnouncement"
-          />
+          <list-group :items="groups" />
         </div>
       </div>
     </div>
@@ -39,14 +29,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { ListGroup, TheAnnouncement } from './components';
-import typeError from '@/constant';
+import { ListGroup } from './components';
 
 export default {
   name: 'Profile',
   components: {
     ListGroup,
-    TheAnnouncement,
   },
   data() {
     return {
@@ -59,33 +47,7 @@ export default {
     ...mapGetters([
       'user',
       'groups',
-      'announcements',
     ]),
-  },
-  created() {
-    this.getAnnouncements();
-  },
-  methods: {
-    viewGroup(id) {
-      return id;
-      // TODO navigate to user's group page
-    },
-    async getAnnouncements() {
-      try {
-        this.getting = true;
-        await this.$store.dispatch('user/getAnnouncements');
-        this.isGetted = true;
-      } catch (error) {
-        if (error.error_code === typeError.REQUEST_ERROR) {
-          this.$toasted.error(`${error.message}`);
-        }
-      } finally {
-        this.getting = false;
-      }
-    },
-    viewAnnouncement(id) {
-      return id;
-    },
   },
 };
 </script>

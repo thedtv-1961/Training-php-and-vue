@@ -40,9 +40,9 @@ export function announcements() {
   });
 }
 
-export function announcementDetail(id) {
+export function announcementDetail() {
   return request({
-    url: `/api/announcements/${id}`,
+    url: '/api/announcements',
     method: 'get',
   });
 }

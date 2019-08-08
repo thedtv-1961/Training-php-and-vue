@@ -9,7 +9,6 @@
         :key="item.id"
         class="list-group-item list-group-item-info"
         :class="{ 'list-group-item-action': itemAction }"
-        @click="$emit('viewItem', item.id)"
       >
         {{ item.name }}
       </li>
