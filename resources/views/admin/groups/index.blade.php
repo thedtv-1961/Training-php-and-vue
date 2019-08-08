@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('/css/group.css') }}">
 @stop
 @section('content')
+@include('admin.notifies._message')
 <div class="row">
     <div>
         <div class="col-md-4">

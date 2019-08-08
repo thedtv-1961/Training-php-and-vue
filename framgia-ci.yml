@@ -40,7 +40,6 @@ test:
   phpcs:
     ignore: false
     command: echo '' | phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml --ignore=app/Supports/* app
-    auto_fix: phpcbf --standard=Framgia app
   phpunit:
     ignore: false
     command:

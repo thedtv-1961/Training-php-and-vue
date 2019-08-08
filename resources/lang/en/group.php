@@ -27,4 +27,10 @@ return [
         'create' => 'Creare Group',
         'edit' => 'Edit Group',
     ],
+    'message' => [
+        'create_success' => 'Create group successfully',
+        'update_success' => 'Update group successfully',
+        'destroy_success' => 'Destroy group successfully',
+        'destroy_fail' => 'Destroy group unsuccessfully',
+    ],
 ];
