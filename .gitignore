@@ -24,3 +24,5 @@ npm-debug.log
 yarn-error.log
 packages.txt
 .docker
+.framgia-ci-reports
+.framgia-ci-result.temp.yml

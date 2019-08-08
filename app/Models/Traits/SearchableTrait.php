@@ -18,5 +18,4 @@ trait SearchableTrait
     {
         return $query->where($atrr, 'like', '%' . $key . '%');
     }
-
 }

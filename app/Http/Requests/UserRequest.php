@@ -34,5 +34,4 @@ class UserRequest extends FormRequest
             'avatar' => 'max:' . config('users.avatar.max'),
         ];
     }
-
 }

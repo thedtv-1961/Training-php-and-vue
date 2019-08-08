@@ -46,7 +46,8 @@ class UserService
             ]);
 
             if (isset($request['avatar'])) {
-                $user['avatar'] = $this->userRepository->uploadAvatar($request, 'avatar', null, config('settings.path_upload_avatar'));
+                $user['avatar'] = $this->userRepository
+                    ->uploadAvatar($request, 'avatar', null, config('settings.path_upload_avatar'));
             }
 
             return $this->userRepository->create($user);
@@ -95,7 +96,8 @@ class UserService
                     $oldAvatarName = $request['old_avatar'];
                 }
 
-                $user['avatar'] = $this->userRepository->uploadAvatar($request, 'avatar', $oldAvatarName, config('settings.path_upload_avatar'));
+                $user['avatar'] = $this->userRepository
+                    ->uploadAvatar($request, 'avatar', $oldAvatarName, config('settings.path_upload_avatar'));
             }
 
             return $this->userRepository->update($id, $user);

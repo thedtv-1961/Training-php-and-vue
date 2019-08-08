@@ -29,11 +29,13 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function getLogin() {
+    public function getLogin()
+    {
         return view('admin.auth.login');
     }
 
-    public function postLogin(LoginRequest $request) {
+    public function postLogin(LoginRequest $request)
+    {
         $data = $request->only([
             'email',
             'password',
@@ -44,8 +46,7 @@ class LoginController extends Controller
             'password' => $data['password'],
         ]);
 
-        if ($authenticated) {        
-            
+        if ($authenticated) {
             return redirect()->route('admin-home');
         }
 

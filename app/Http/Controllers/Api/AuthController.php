@@ -45,10 +45,11 @@ class AuthController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
 
-        if (!Auth::attempt($credentials))
+        if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => trans('auth.failed')
+                'message' => trans('auth.failed'),
             ], 401);
+        }
 
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
@@ -78,7 +79,7 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => trans('auth.logout')
+            'message' => trans('auth.logout'),
         ], config('code.success_code.success'));
     }
 
@@ -99,7 +100,6 @@ class AuthController extends Controller
         $user = $this->userRepository->firstOrCreate($data);
         
         if ($user) {
-
             return response()->json([
                 'message' => trans('auth.register_success'),
             ], config('code.success_code.success'));

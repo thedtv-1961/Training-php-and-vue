@@ -24,7 +24,8 @@ class UserRepository extends BaseRepository implements UserInterface
      */
     public function uploadAvatar($request, $name, $oldAvatarName, $pathUpload)
     {
-        if (Storage::disk('local')->exists($oldAvatarName) && $oldAvatarName != config('settings.avatar_default_path')) {
+        if (Storage::disk('local')->exists($oldAvatarName)
+            && $oldAvatarName != config('settings.avatar_default_path')) {
             Storage::disk('local')->delete($oldAvatarName);
         }
 
