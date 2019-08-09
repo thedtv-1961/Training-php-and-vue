@@ -30,6 +30,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     });
 
     Route::resource('change_email_requests', 'ChangeEmailRequestController');
+
+    Route::get('profile', 'ProfileController@getProfile')->name('get_profile');
+
+    Route::post('profile', 'ProfileController@updateProfile')->name('update_profile');
+
+    Route::post('change-avatar', 'ProfileController@changeAvatar')->name('change_avatar');
 });
 
 Route::get('/api-docs', function() {

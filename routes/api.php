@@ -30,7 +30,7 @@ Route::group(['prefix' => 'forgot-password'], function () {
     Route::post('reset', 'Api\ResetPasswordController@reset');
 });
 
-Route::group(['namespace' => 'User', 'middleware' => 'auth:api'], function () {
+Route::group(['namespace' => 'Api\User', 'middleware' => 'auth:api'], function () {
     Route::resource('users', 'ProfileController', [
         'only' => [
             'show',

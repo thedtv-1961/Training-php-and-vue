@@ -25,10 +25,9 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'birthday' => 'date',
+            'birthday' => 'date|before:today',
             'phone' => 'numeric|digits_between:10,11',
-            'address' => 'max:255',
-            'gender' => 'numeric|digits_between:0,1',
+            'address' => 'max:' . config('users.address.max'),
         ];
     }
 }
