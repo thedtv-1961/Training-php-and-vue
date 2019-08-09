@@ -111,9 +111,9 @@ class User extends Authenticatable
 
     /**
      * Determine if the user has a role.
-     * 
+     *
      * @param  string  $roleSlug
-     * 
+     *
      * @return bool
      */
     public function hasRole($roleSlug)
@@ -125,5 +125,15 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    /**
+     * The channels the user receives notification broadcasts on.
+     *
+     * @return string
+     */
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'App.User.'.$this->id;
     }
 }
