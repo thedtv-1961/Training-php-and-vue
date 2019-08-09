@@ -32,5 +32,13 @@ export default {
       required: false,
     },
   },
+  created() {
+    this.getGroups();
+  },
+  methods: {
+    async getGroups() {
+      await this.$store.dispatch('user/getGroups');
+    },
+  },
 };
 </script>

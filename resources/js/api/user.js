@@ -46,3 +46,10 @@ export function announcementDetail() {
     method: 'get',
   });
 }
+
+export function getGroups() {
+  return request({
+    url: '/api/groups',
+    method: 'get',
+  });
+}

@@ -1,4 +1,4 @@
-import { login, signUp, getInfo, signOut, announcements } from '@/api/user';
+import { login, signUp, getInfo, getGroups, signOut, announcements } from '@/api/user';
 import { getToken, setToken, removeToken } from '@/utils/auth';
 
 const state = {
@@ -20,6 +20,9 @@ const mutations = {
   },
   SET_ANNOUNCEMENTS: (_state, data) => {
     _state.announcements = data;
+  },
+  SET_GROUPS: (_state, groups) => {
+    _state.groups = groups;
   },
 };
 
@@ -71,6 +74,15 @@ const actions = {
       const data = await announcements();
       commit('SET_ANNOUNCEMENTS', data);
       return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+  async getGroups({ commit }) {
+    try {
+      const data = await getGroups();
+      commit('SET_GROUPS', data.data);
+      return Promise.resolve(data.data);
     } catch (error) {
       return Promise.reject(error);
     }
