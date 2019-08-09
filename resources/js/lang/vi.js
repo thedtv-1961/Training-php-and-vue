@@ -28,6 +28,9 @@ export default {
     yourAnnouncement: 'Thông báo',
     nothingGroup: 'Bạn không thuộc bất kỳ nhóm nào',
     nothingAnnouncement: 'Bạn không có thông báo nào',
+    changeEmail: 'Thay đổi Email',
+    send: 'Gửi yêu cầu',
+    changeEmailRequestSent: 'Yêu cầu của bạn đã được gửi đến admin, vui lòng chờ!',
   },
   notification: {
     empty: 'Không có thông báo nào!',

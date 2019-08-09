@@ -12,7 +12,7 @@
     </div>
     <div v-else>
       <p class="text-center">
-        Nothing to show
+        {{ $t("user.nothingAnnouncement") }}
       </p>
     </div>
   </div>
