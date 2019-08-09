@@ -9,7 +9,11 @@ return [
     'name' => [
         'max' => 255,
     ],
-    'image' =>[
+    'image' => [
         'max' => 2048,
+    ],
+    'email_type' => [
+        'add' => 0,
+        'remove' => 1,
     ],
 ];

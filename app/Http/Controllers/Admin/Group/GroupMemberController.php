@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\GroupUser;
 use Illuminate\Http\Request;
+use App\Jobs\SendGroupMember;
 use App\Events\UserNotification;
 use App\Http\Controllers\Controller;
 use App\Services\NotificationService;
@@ -93,6 +94,8 @@ class GroupMemberController extends Controller
         $notificationContent = $this->notificationService
             ->getContentNotificationByGroup('add_new_member', $group->name, $data['user_id']);
         event(new UserNotification($notificationContent, $data['user_id']));
+        $member = $this->userRepository->find($data['user_id']);
+        $this->dispatch(new SendGroupMember(config('groups.email_type.add'), $member->email, trans('group.email.title.add'), $group, $member));
 
         return redirect()
             ->action('Admin\Group\GroupMemberController@index', $group->id)
@@ -111,10 +114,13 @@ class GroupMemberController extends Controller
     public function destroy(Group $group, Request $request, $userId)
     {
         $user = $group->users()->detach($userId);
+
         if ($user) {
             $notificationContent = $this->notificationService
                 ->getContentNotificationByGroup('remove_member', $group->name, $userId);
             event(new UserNotification($notificationContent, $userId));
+            $member = $this->userRepository->find($userId);
+            $this->dispatch(new SendGroupMember(config('groups.email_type.remove'), $member->email, trans('group.email.title.remove'), $group, $member));
 
             return redirect()
             ->action('Admin\Group\GroupMemberController@index', $group->id)
