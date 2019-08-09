@@ -80,6 +80,7 @@ class AnnouncementController extends Controller
     public function edit(Group $group, $announcementId)
     {
         $announcement = $group->announcements->find($announcementId);
+        $this->authorize('view', $announcement);
 
         return view('admin.group.announcements.edit', compact('group', 'announcement'));
     }
@@ -95,6 +96,7 @@ class AnnouncementController extends Controller
     {
         $validated = $request->validated();
         $announcement = $group->announcements->find($announcementId);
+        $this->authorize('update', $announcement);
         $announcement->update($request->all());
 
         return redirect()->route('groups.announcements.index', $group->id);
@@ -109,6 +111,7 @@ class AnnouncementController extends Controller
      */
     public function destroy($groupId, Request $request, Announcement $announcement)
     {
+        $this->authorize('delete', $announcement);
         $announcement->destroy($announcement->id);
 
         return redirect()->route('groups.announcements.index', $groupId);

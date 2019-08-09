@@ -12,7 +12,6 @@
 */
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
-    Route::get('/', 'HomeController@index')->name('admin-home');
 
     Route::get('login', 'Auth\LoginController@getLogin')->name('getLogin');
 
@@ -20,22 +19,29 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
     Route::delete('logout', 'Auth\LoginController@logout')->name('logout');
 
-    Route::resource('groups', 'GroupController');
+    Route::group(['middleware' => 'admin'], function () {
 
-    Route::resource('users', 'UserController');
+        Route::get('/', 'HomeController@index')->name('admin-home');
 
-    Route::group(['namespace' => 'Group'], function () {
-        Route::resource('groups.announcements', 'AnnouncementController');
-        Route::resource('groups.members', 'GroupMemberController');
-    });
+        Route::resource('groups', 'GroupController');
 
-    Route::resource('change_email_requests', 'ChangeEmailRequestController');
+        Route::resource('users', 'UserController');
 
-    Route::get('profile', 'ProfileController@getProfile')->name('get_profile');
+        Route::resource('change_email_requests', 'ChangeEmailRequestController');
 
-    Route::post('profile', 'ProfileController@updateProfile')->name('update_profile');
+        Route::get('profile', 'ProfileController@getProfile')->name('get_profile');
 
-    Route::post('change-avatar', 'ProfileController@changeAvatar')->name('change_avatar');
+        Route::post('profile', 'ProfileController@updateProfile')->name('update_profile');
+
+        Route::post('change-avatar', 'ProfileController@changeAvatar')->name('change_avatar');
+        
+        Route::group(['namespace' => 'Group'], function () {
+            Route::resource('groups.announcements', 'AnnouncementController');
+            Route::resource('groups.members', 'GroupMemberController');
+        });
+
+        Route::resource('change_email_requests', 'ChangeEmailRequestController');
+        });
 });
 
 Route::get('/api-docs', function() {

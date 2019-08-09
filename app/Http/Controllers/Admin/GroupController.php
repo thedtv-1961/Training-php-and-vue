@@ -90,6 +90,7 @@ class GroupController extends Controller
     public function update(UpdateGroupRequest $request, Group $group)
     {
         $group->update($this->groupParams($request));
+        $this->authorize('updateDescription', $group);
 
         return redirect('/admin/groups')
             ->with('message_class', 'success')

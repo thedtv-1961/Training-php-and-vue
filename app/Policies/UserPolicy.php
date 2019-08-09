@@ -35,4 +35,16 @@ class UserPolicy
     {
         return $user->id === $guest->id;
     }
+
+    /**
+     * Determine whether the user can approve change email request.
+     * 
+     * @param  User  $user
+     * 
+     * @return bool
+     */
+    public function approveChangeEmail(User $user, User $guest)
+    {
+        return $guest->hasRole(config('users.roles.admin'));
+    }
 }
