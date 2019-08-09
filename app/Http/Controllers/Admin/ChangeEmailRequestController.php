@@ -67,6 +67,7 @@ class ChangeEmailRequestController extends Controller
      */
     public function update($id, Request  $request)
     {
+        $this->authorize('approveChangeEmail', auth()->user());
         DB::beginTransaction();
         try {
             if ($request->status == config('change_email_requests.status.approved')) {

@@ -80,6 +80,7 @@ class GroupMemberController extends Controller
      */
     public function store(Group $group, Request $request)
     {
+        $this->authorize('addMember', $group);
         $data = $request->only(['user_id']);
         $result = $group->users()->where('user_id', $data['user_id'])->first();
         if ($result) {
@@ -111,6 +112,7 @@ class GroupMemberController extends Controller
      */
     public function destroy(Group $group, Request $request, $userId)
     {
+        $this->authorize('deleteMember', $group);
         $user = $group->users()->detach($userId);
         if ($user) {
             $notificationContent = $this->notificationService
