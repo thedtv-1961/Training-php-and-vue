@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     async getGroups() {
-      this.$store.dispatch('user/getGroups');
+      await this.$store.dispatch('user/getGroups');
     },
   },
 };
