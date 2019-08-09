@@ -3,9 +3,9 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Auth;
-use App\Models\ChangeEmailRequest;
 use Illuminate\Http\Request;
 use App\Events\UserNotification;
+use App\Models\ChangeEmailRequest;
 use App\Http\Controllers\Controller;
 use App\Services\NotificationService;
 use App\Repositories\User\UserRepository;
@@ -73,7 +73,6 @@ class ChangeEmailRequestController extends Controller
                 $changeEmailRequest = $this->changeEmailRequestRepository
                                         ->update($id, ['status' => $request->status, 'admin_id' => Auth::user()->id]);
                 $listUser = $this->userRepository->pluck('email')->toArray();
-                ;
                 $emailChange = $changeEmailRequest->email_change;
                 if (in_array($emailChange, $listUser)) {
                     return back()
