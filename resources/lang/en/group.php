@@ -33,4 +33,15 @@ return [
         'destroy_success' => 'Destroy group successfully',
         'destroy_fail' => 'Destroy group unsuccessfully',
     ],
+    'email' => [
+        'title' => [
+            'add' => '[Training-php-and-vue] Add member',
+            'remove' => '[Training-php-and-vue] Remove member',
+        ],
+        'contain' => [
+            'add' => 'Hi <strong>:name</strong>,<br> Welcome to <strong>:group</strong> group, We added you to <strong>:name</strong> group ,<br>If you have any question please let us know,<br><br>Thanks,',
+            'remove' => 'Hi <strong>:name</strong>,<br> We removed you from <strong>:group</strong> group ,<br>If you have any question please let us know,<br><br>Thanks,',
+        ],
+
+    ],
 ];

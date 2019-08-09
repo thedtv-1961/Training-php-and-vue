@@ -28,7 +28,7 @@ class EditAdminIdOnChangeEmailRequestsTable extends Migration
     {
         Schema::table('change_email_requests', function (Blueprint $table)
         {
-            $table->unsignedInteger('admin_id');
+            $table->dropColumn('admin_id');
         });
     }
 }

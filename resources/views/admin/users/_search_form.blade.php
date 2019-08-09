@@ -7,7 +7,7 @@
 @endphp
 
 <form class="form-horizontal frm-filter col-md-12" action="{{ route('users.index') }}">
-    <div class="form-header-container col-md-9 col-md-offset-1">
+    <div class="form-header-container col-md-10 col-md-offset-1">
         <div class="id-form-field no-padding">
             <label for="id"
                    class="label-text">{{ trans('user.attribute.id.label') }}</label>

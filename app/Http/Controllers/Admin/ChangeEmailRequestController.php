@@ -106,6 +106,7 @@ class ChangeEmailRequestController extends Controller
                     ->with('message_class', 'success')
                     ->with('message', trans('change_email_requests.index.successfully_updated'));
         } catch (\Exception $exception) {
+            dd($exception);
             DB::rollback();
             return back()
                 ->withInput()
