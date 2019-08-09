@@ -66,13 +66,15 @@ class ResetPasswordController extends Controller
     /**
      * Find token password reset
      *
-     * @param  string  $token
+     * @param  Request  $request
      * 
      * @return \Illuminate\Http\JsonResponse
      *
      */
-    public function checkToken($token)
+    public function checkToken(Request $request)
     {
+        $token = $request->reset_token;
+
         $passwordReset = $this->userRepository->whereFirst('reset_token', $token);
 
         if (!$passwordReset) {

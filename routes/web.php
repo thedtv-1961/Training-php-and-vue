@@ -39,7 +39,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 });
 
 Route::get('/api-docs', function() {
-   return view('swagger/index');
+    return view('swagger/index');
 });
 
 Route::get('/{vue?}', function () {
