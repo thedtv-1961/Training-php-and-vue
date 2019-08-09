@@ -13,7 +13,16 @@
       <div class="col-12 col-md-8">
         <div class="user__profile">
           <h3>{{ user.name }}</h3>
-          <p><b>{{ $t("user.email") }}: </b>{{ user.email }}</p>
+          <p>
+            <b>{{ $t("user.email") }}: </b>{{ user.email }}
+            <button
+              class="btn btn-sm btn-info ml-3"
+              data-toggle="modal"
+              data-target="#changeEmailModal"
+            >
+              {{ $t("user.changeEmail") }}
+            </button>
+          </p>
           <p><b>{{ $t("user.birthday") }}: </b>{{ user.birthday }}</p>
           <p><b>{{ $t("user.gender") }}: </b>{{ user.gender }}</p>
           <p><b>{{ $t("user.phone") }}: </b>{{ user.phone }}</p>
@@ -24,17 +33,19 @@
         </div>
       </div>
     </div>
+    <change-email-form />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import { ListGroup } from './components';
+import { ListGroup, ChangeEmailForm } from './components';
 
 export default {
   name: 'Profile',
   components: {
     ListGroup,
+    ChangeEmailForm,
   },
   data() {
     return {

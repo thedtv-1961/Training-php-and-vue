@@ -53,3 +53,11 @@ export function getGroups() {
     method: 'get',
   });
 }
+
+export function changeEmail(data) {
+  return request({
+    url: 'api/change-email-request',
+    method: 'post',
+    data,
+  });
+}

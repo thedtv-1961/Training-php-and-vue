@@ -28,6 +28,9 @@ export default {
     yourAnnouncement: 'Your Announcement',
     nothingGroup: 'You are not belong to any group',
     nothingAnnouncement: 'You have not announcememt',
+    changeEmail: 'Change Email',
+    send: 'Send change Email request',
+    changeEmailRequestSent: 'Your request has been sent, please waiting for admin to approve',
   },
   notification: {
     empty: 'Nothing to show!',

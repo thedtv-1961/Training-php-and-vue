@@ -1,4 +1,12 @@
-import { login, signUp, getInfo, getGroups, signOut, announcements } from '@/api/user';
+import {
+  login,
+  signUp,
+  getInfo,
+  getGroups,
+  signOut,
+  announcements,
+  changeEmail,
+} from '@/api/user';
 import { getToken, setToken, removeToken } from '@/utils/auth';
 
 const state = {
@@ -83,6 +91,14 @@ const actions = {
       const data = await getGroups();
       commit('SET_GROUPS', data.data);
       return Promise.resolve(data.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+  async changeEmail(_, payload) {
+    try {
+      await changeEmail(payload);
+      return Promise.resolve();
     } catch (error) {
       return Promise.reject(error);
     }
