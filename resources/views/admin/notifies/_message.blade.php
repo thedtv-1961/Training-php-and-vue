@@ -6,6 +6,4 @@
           </button>
     </div>
 @endif
-@section('js')
-    <script src="{{ asset('/js/alert.js') }}"></script>
-@stop
+<script src="{{ asset('/js/alert.js') }}"></script>
