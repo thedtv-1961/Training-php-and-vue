@@ -170,6 +170,11 @@ abstract class BaseRepository implements BaseInterface
         return $this;
     }
 
+    public function whereFirst(string $conditions, string $value)
+    {
+        return $this->model->where($conditions, $value)->first();
+    }
+
     public function whereBetween($colunm, $values)
     {
         $this->model = $this->model->whereBetween($colunm, $values);

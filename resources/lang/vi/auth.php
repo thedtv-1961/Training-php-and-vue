@@ -18,5 +18,8 @@ return [
     'logout' => 'Đăng xuất thành công',
     'register_success' => 'Đăng ký thành công',
     'register_fail' => 'Đăng ký thất bại. Vui lòng thử lại!',
-
+    'email_not_found' => 'Không tìm thấy email này. Vui lòng thử lại!',
+    'send_mail_password' => 'Một email yêu cầu thay đổi mật khẩu đã được gửi đến. Vui lòng kiểm tra email của bạn!',
+    'token_invalid' => 'Mã thay đổi mật khẩu không đúng! Vui lòng kiểm tra lại!',
+    'token_expired' => 'Mã thay đổi mật khẩu đã hết hạn',
 ];
